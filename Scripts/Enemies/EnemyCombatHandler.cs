@@ -2,21 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CombatHandler : MonoBehaviour
+public class EnemyCombatHandler : MonoBehaviour
 {
+    [SerializeField] private GameObject player;
+
     public int maxHealth;
     public int health;
-    public int shields;
-    public int actionPoints;
     [SerializeField] private List<int> modifiers;
     [Header("DICE -SPECIAL SIDED-")]
     [SerializeField] private List<Die> dice;
     [Header("DICE -NORMAL-")]
     [SerializeField] private List<int> numSides;
-    private Inventory inventory;
 
-    private int maxActionPoints;
-    private bool takingTurn;
 
     private void Start()
     {
@@ -30,36 +27,11 @@ public class CombatHandler : MonoBehaviour
             }
             dice.Add(new Die(diceSides));
         }
-        UpdateMaxActionPoints();
-        actionPoints = 0;
-        inventory = new Inventory();
     }
 
-    private void TakeTurn()
+    public void DealDamage(GameObject target)
     {
-        actionPoints += RollDice();
-        if (actionPoints > maxActionPoints)
-            actionPoints = maxActionPoints;
-        takingTurn = true;
-    }
-
-    public void SetTurn(bool turnState)
-    {
-        takingTurn = turnState;
-    }
-
-    private void UpdateMaxActionPoints()
-    {
-        maxActionPoints = 0;
-        foreach(Die die in dice)
-        {
-            maxActionPoints += die.MaxRoll();
-        }
-        maxActionPoints *= 2;
-    }
-
-    public void DealDamage(int amount, GameObject target)
-    {
+        int amount = RollDice();
         target.GetComponent<CombatHandler>().TakeDamage(amount);
         Debug.Log(gameObject.name + " dealth " + amount + " damage to " + target.name + "!");
     }
@@ -80,5 +52,10 @@ public class CombatHandler : MonoBehaviour
             sum += modifier;
         }
         return sum;
+    }
+
+    public void AttackPlayer()
+    {
+        DealDamage(player);
     }
 }

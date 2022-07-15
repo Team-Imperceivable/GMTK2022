@@ -20,4 +20,15 @@ public class Die
     {
         return sides;
     }
+
+    public int MaxRoll()
+    {
+        int max = System.Int32.MinValue;
+        foreach (int num in sides)
+        {
+            if (num > max)
+                max = num;
+        }
+        return max;
+    }
 }

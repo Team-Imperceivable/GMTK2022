@@ -6,4 +6,5 @@ public struct FrameInputs
 {
     public Vector3 mousePos;
     public bool select;
+    public bool endTurn;
 }
