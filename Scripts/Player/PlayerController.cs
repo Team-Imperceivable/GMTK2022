@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private PlayerMovement movementScript;
     private FrameInputs _inputs;
 
     // Start is called before the first frame update
@@ -18,15 +17,14 @@ public class PlayerController : MonoBehaviour
     {
         GatherInputs();
 
-        movementScript.SetInputs(_inputs);
     }
 
     private void GatherInputs()
     {
         _inputs = new FrameInputs
         {
-            x = Input.GetAxisRaw("Horizontal"),
-            y = Input.GetAxisRaw("Vertical")
+            mousePos = Input.mousePosition,
+            select = Input.GetButtonDown("Fire1")
         };
     }
 }

@@ -4,5 +4,6 @@ using UnityEngine;
 
 public struct FrameInputs
 {
-    public float x, y;
+    public Vector3 mousePos;
+    public bool select;
 }
