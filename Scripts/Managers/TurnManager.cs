@@ -65,6 +65,7 @@ public class TurnManager : MonoBehaviour
 
     private void StartCombat()
     {
+        enemyController.NextEncounter();
         inCombat = true;
         enemyController.UpdateDamage();
         PlayerTurn();

@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         GatherInputs();
-        CheckSelect();
+        CheckSelect();  
     }
 
     #region Selecting

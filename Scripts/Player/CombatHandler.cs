@@ -17,6 +17,7 @@ public class CombatHandler : MonoBehaviour
     private Inventory inventory;
     public int maxActionPoints;
 
+    public bool stunned => skipTurnCounter > 0;
     private string json;
     private int skipTurnCounter;
 
@@ -95,17 +96,25 @@ public class CombatHandler : MonoBehaviour
         if (maxHealth < health)
             health = maxHealth;
     }
-    private void StunTarget(int amount, GameObject target)
+    private void StunTarget(int amount, GameObject target, int cost)
     {
         EnemyCombatHandler enemyCombatHandler = target.GetComponent<EnemyCombatHandler>();
         CombatHandler combatHandler = target.GetComponent<CombatHandler>();
         if (enemyCombatHandler != null)
         {
-            enemyCombatHandler.StunAmount(amount);
+            if(!enemyCombatHandler.stunned)
+            {
+                enemyCombatHandler.StunAmount(amount);
+                actionPoints -= cost;
+            }
         }
         else if (combatHandler != null)
         {
-            combatHandler.StunAmount(amount);
+            if (combatHandler.stunned)
+            {
+                combatHandler.StunAmount(amount);
+                
+            }
         }
     }
     public void StunAmount(int amount)
@@ -165,7 +174,7 @@ public class CombatHandler : MonoBehaviour
         }
         if (target != null)
         {
-            if (item.GetEffect().Equals("Damage"))
+            if (item.GetEffect().Equals("Damage") && target != gameObject)
             {
                 DealDamage(item.GetAmount(), target);
                 actionPoints -= item.GetCost();
@@ -175,7 +184,7 @@ public class CombatHandler : MonoBehaviour
                 actionPoints -= item.GetCost();
             } else if(item.GetEffect().Equals("Stun"))
             {
-
+                StunTarget(item.GetAmount(), target, item.GetCost());
             }
         }
         item.UseItem();

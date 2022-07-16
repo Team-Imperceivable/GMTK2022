@@ -11,6 +11,7 @@ public class EnemyCombatHandler : MonoBehaviour
     [SerializeField] private int minDamage, maxDamage;
     [SerializeField] private CombatHandler playerCombatHandler;
 
+    public bool stunned => skipTurnCounter > 0;
     private int skipTurnCounter;
 
     private void Start()
@@ -26,6 +27,10 @@ public class EnemyCombatHandler : MonoBehaviour
     public void TakeDamage(int amount)
     {
         health -= amount;
+        if(health <= 0)
+        {
+            SendMessageUpwards("NextEncounter");
+        }
     }
     public void HealAmount(int amount)
     {

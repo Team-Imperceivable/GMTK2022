@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    public int encounterNumber;
+    public int lastEncounterNumber;
     public bool doneWithTurn;
+
+    private EncounterManager activeEncounter;
 
     // Start is called before the first frame update
     void Start()
     {
         doneWithTurn = true;
+        encounterNumber = 0;
     }
 
     public void UpdateDamage()
@@ -20,5 +25,22 @@ public class EnemyController : MonoBehaviour
     public void TakeTurn()
     {
         BroadcastMessage("TakeEnemyTurn");   
+    }
+
+    public void NextEncounter()
+    {
+        if(encounterNumber != lastEncounterNumber)
+        {
+            if(encounterNumber != 0)
+            {
+                activeEncounter.SetEncounterActive(false);
+            }
+            encounterNumber++;
+            GameObject encounterObj = transform.Find("Encounter " + encounterNumber).gameObject;
+            encounterObj.SetActive(true);
+            EncounterManager encounter = encounterObj.GetComponent<EncounterManager>();
+            activeEncounter = encounter;
+            encounter.SetEncounterActive(true);
+        }
     }
 }
