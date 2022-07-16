@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneManager : MonoBehaviour
+public class FkU : MonoBehaviour
 {
     [SerializeField] private CombatHandler combatHandler;
     private void LoadNextScene()
