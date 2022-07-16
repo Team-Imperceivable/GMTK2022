@@ -21,4 +21,25 @@ public class Item
     {
 
     }
+
+    public int GetCost()
+    {
+        return cost;
+    }
+    public int GetAmount()
+    {
+        return amount;
+    }
+    public string GetEffect()
+    {
+        return effect;
+    }
+    public string GetName()
+    {
+        return name;
+    }
+    public string GetDescription()
+    {
+        return description;
+    }
 }

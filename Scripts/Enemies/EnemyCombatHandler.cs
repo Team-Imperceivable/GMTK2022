@@ -4,58 +4,29 @@ using UnityEngine;
 
 public class EnemyCombatHandler : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
-
     public int maxHealth;
     public int health;
+    public int nextAttack;
     [SerializeField] private List<int> modifiers;
-    [Header("DICE -SPECIAL SIDED-")]
-    [SerializeField] private List<Die> dice;
-    [Header("DICE -NORMAL-")]
-    [SerializeField] private List<int> numSides;
-
+    [SerializeField] private int minDamage, maxDamage;
+    [SerializeField] private CombatHandler playerCombatHandler;
 
     private void Start()
     {
         health = maxHealth;
-        foreach (int num in numSides)
-        {
-            List<int> diceSides = new List<int>();
-            for (int i = 1; i <= num; i++)
-            {
-                diceSides.Add(i);
-            }
-            dice.Add(new Die(diceSides));
-        }
     }
 
-    public void DealDamage(GameObject target)
+    public void RollDamage()
     {
-        int amount = RollDice();
-        target.GetComponent<CombatHandler>().TakeDamage(amount);
-        Debug.Log(gameObject.name + " dealth " + amount + " damage to " + target.name + "!");
+        nextAttack = Random.Range(minDamage, maxDamage + 1);
     }
     public void TakeDamage(int amount)
     {
         health -= amount;
     }
 
-    private int RollDice()
-    {
-        int sum = 0;
-        foreach (Die die in dice)
-        {
-            sum += die.Roll();
-        }
-        foreach (int modifier in modifiers)
-        {
-            sum += modifier;
-        }
-        return sum;
-    }
-
     public void AttackPlayer()
     {
-        DealDamage(player);
+        playerCombatHandler.TakeDamage(nextAttack);
     }
 }

@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public bool doneWithTurn;
+
     [SerializeField] private CombatHandler combatHandler;
-    [SerializeField] private EnemyController enemyController;
     private FrameInputs inputs;
+
+    private int selectedItemSlot;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +22,6 @@ public class PlayerController : MonoBehaviour
     {
         GatherInputs();
         CheckSelect();
-        CheckEndTurn();
     }
 
     #region Selecting
@@ -30,22 +32,27 @@ public class PlayerController : MonoBehaviour
             Collider2D[] hitColliders = Physics2D.OverlapPointAll(inputs.mousePos);
             foreach(Collider2D collider in hitColliders)
             {
-                
+                if(collider != null && collider.tag.Equals("Enemy") && !doneWithTurn)
+                {
+                    if(selectedItemSlot != 0)
+                    {
+                        combatHandler.UseItem(selectedItemSlot, collider.gameObject);
+                    }
+                }
             }
         }
     }
-    #endregion
 
-    #region End Turn
-    private void CheckEndTurn()
+    public void SelectItem(int selectedSlot)
     {
-        if(inputs.endTurn)
-        {
-            combatHandler.SetTurn(false);
-            enemyController.TakeTurn();
-        }
+        selectedItemSlot = selectedSlot;
     }
     #endregion
+
+    public void TakeTurn()
+    {
+        combatHandler.TakeTurn();
+    }
 
     private void GatherInputs()
     {
