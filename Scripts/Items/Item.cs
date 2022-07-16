@@ -7,6 +7,8 @@ public class Item
     protected string name, effect, description;
     protected int cost;
     protected int amount;
+    protected int diceSides;
+    protected int uses;
 
     public Item()
     {
@@ -15,6 +17,8 @@ public class Item
         description = "The template item";
         cost = 0;
         amount = 0;
+        diceSides = 0;
+        uses = -1;
     }
 
     public void UseItem()
@@ -41,5 +45,13 @@ public class Item
     public string GetDescription()
     {
         return description;
+    }
+    public int GetDiceSides()
+    {
+        return diceSides;
+    }
+    public int GetUses()
+    {
+        return uses;
     }
 }
