@@ -8,9 +8,9 @@ public class GamblingAddict : Item
     {
         name = "Gambling Addict";
         effect = "Dice";
-        description = "Roll a d8";
-        cost = 5;
-        amount = 8;
+        description = "Roll a 2d8";
+        cost = 9;
+        amount = 2;
     }
 }
 
