@@ -308,7 +308,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   combatHandler: {fileID: 1168054184}
   enemyController: {fileID: 1558261998}
-  maxActions: 1
 --- !u!61 &1168054183
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -349,6 +348,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   health: 0
+  shields: 0
+  actionPoints: 0
   modifiers: 
   dice: []
   numSides: 0600000006000000
