@@ -11,5 +11,7 @@ public class GreaterShield : Item
         description = "Now this is more like it";
         cost = 7;
         amount = 10;
+        diceSides = 0;
+        uses = -1;
     }
 }

@@ -11,5 +11,7 @@ public class BetterShield : Item
         description = "I mean, it's an upgrade.";
         cost = 5;
         amount = 6;
+        diceSides = 0;
+        uses = -1;
     }
 }

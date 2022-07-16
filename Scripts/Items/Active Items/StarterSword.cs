@@ -11,5 +11,7 @@ public class StarterSword : Item
         description = "Does this even qualify as a sword?";
         cost = 3;
         amount = 2;
+        diceSides = 0;
+        uses = -1;
     }
 }

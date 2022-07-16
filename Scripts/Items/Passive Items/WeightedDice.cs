@@ -10,7 +10,9 @@ public class WeightedDice : Item
         effect = "Passive";
         description = "You cannot roll 1s";
         cost = 0;
-        amount = 0;
+        amount = 1;
+        uses = -1;
+        diceSides = 0;
     }
 }
 
