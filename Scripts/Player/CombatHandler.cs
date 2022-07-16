@@ -260,13 +260,24 @@ public class CombatHandler : MonoBehaviour
         }
     }
 
-    public void AddItemToInventory(Item item)
+    public bool AddItemToInventory(Item item)
     {
-        inventory.AddItem(item);
+        return inventory.AddItem(item);
     }
 
     public Inventory GetInventory()
     {
         return inventory;
+    }
+
+    public void AddDie(Die toBeAdded)
+    {
+        dice.Add(toBeAdded);
+        UpdateMaxActionPoints();
+    }
+
+    public void ReplaceItem(int itemSlot, Item item)
+    {
+        inventory.items[itemSlot] = item;
     }
 }

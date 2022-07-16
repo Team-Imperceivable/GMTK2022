@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Die
+public class Die : Item
 {
     private List<int> sides;
     public Die(List<int> sidesOfDice)
@@ -30,5 +30,15 @@ public class Die
                 max = num;
         }
         return max;
+    }
+
+    public static Die CreateDice(int num)
+    {
+        List<int> diceSides = new List<int>();
+        for (int i = 1; i <= num; i++)
+        {
+            diceSides.Add(i);
+        }
+        return new Die(diceSides);
     }
 }
