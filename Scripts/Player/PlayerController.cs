@@ -30,15 +30,13 @@ public class PlayerController : MonoBehaviour
         if(inputs.select)
         {
             Collider2D[] hitColliders = Physics2D.OverlapPointAll(inputs.mousePos);
-            foreach(Collider2D collider in hitColliders)
+            
+            if(selectedItemSlot != 0 && !doneWithTurn)
             {
-                if(collider != null && collider.tag.Equals("Enemy") && !doneWithTurn)
-                {
-                    if(selectedItemSlot != 0)
-                    {
-                        combatHandler.UseItem(selectedItemSlot, collider.gameObject);
-                    }
-                }
+                if (hitColliders.Length > 0)
+                    combatHandler.UseItem(selectedItemSlot, hitColliders[0].gameObject);
+                else
+                    combatHandler.UseItem(selectedItemSlot, null);
             }
         }
     }

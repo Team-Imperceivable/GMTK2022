@@ -44,7 +44,6 @@ public class TurnManager : MonoBehaviour
         playerTurn = false;
         enemyController.doneWithTurn = true;
         PlayerTurn();
-        Debug.Log("Got Here");
     }
 
     private void PlayerTurn()

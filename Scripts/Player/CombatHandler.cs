@@ -6,7 +6,7 @@ public class CombatHandler : MonoBehaviour
 {
     public int maxHealth;
     public int health;
-    public int shields;
+    public int armor;
     public int actionPoints;
     [SerializeField] private List<int> modifiers;
     [Header("DICE -SPECIAL SIDED-")]
@@ -43,6 +43,7 @@ public class CombatHandler : MonoBehaviour
 
     public void TakeTurn()
     {
+        armor = 0;
         actionPoints += RollDice();
         if (actionPoints > maxActionPoints)
             actionPoints = maxActionPoints;
@@ -61,11 +62,16 @@ public class CombatHandler : MonoBehaviour
     public void DealDamage(int amount, GameObject target)
     {
         target.GetComponent<EnemyCombatHandler>().TakeDamage(amount);
-        Debug.Log(gameObject.name + " dealth " + amount + " damage to " + target.name + "!");
+        Debug.Log(gameObject.name + " dealt " + amount + " damage to " + target.name + "!");
     }
     public void TakeDamage(int amount)
     {
-        health -= amount;
+        int combined = armor + health;
+        combined -= amount;
+        if(combined < health)
+        {
+            health = combined;
+        }
     }
 
     private int RollDice()
@@ -97,10 +103,20 @@ public class CombatHandler : MonoBehaviour
         Item item = inventory.items[itemSlot - 1];
         if (item == null || item.GetCost() > actionPoints)
             return;
-        if(item.GetEffect().Equals("Damage"))
+        Debug.Log(item.GetName());
+        
+        if (item.GetEffect().Equals("Block"))
         {
-            DealDamage(item.GetAmount(), target);
+            armor += item.GetAmount();
             actionPoints -= item.GetCost();
+        }
+        if (target != null)
+        {
+            if (item.GetEffect().Equals("Damage"))
+            {
+                DealDamage(item.GetAmount(), target);
+                actionPoints -= item.GetCost();
+            }
         }
     }
 }
