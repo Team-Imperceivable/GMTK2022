@@ -11,5 +11,7 @@ public class PepperSpray : Item
         description = "Stun an enemy";
         cost = 15;
         amount = 1;
+        diceSides = 0;
+        uses = -1;
     }
 }

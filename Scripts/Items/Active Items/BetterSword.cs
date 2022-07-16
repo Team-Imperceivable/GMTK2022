@@ -11,5 +11,7 @@ public class BetterSword : Item
         description = "It's an improvement";
         cost = 5;
         amount = 6;
+        diceSides = 0;
+        uses = -1;
     }
 }

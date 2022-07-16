@@ -11,5 +11,7 @@ public class Blunt : Item
         description = "That's some good shit";
         cost = 0;
         amount = 0;
+        diceSides = 0;
+        uses = -1;
     }
 }

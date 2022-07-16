@@ -11,5 +11,7 @@ public class TheChalice : Item
         description = "Tastes like pineapple";
         cost = 6;
         amount = 3;
+        diceSides = 0;
+        uses = -1;
     }
 }

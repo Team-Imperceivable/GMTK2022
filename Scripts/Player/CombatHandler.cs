@@ -20,6 +20,7 @@ public class CombatHandler : MonoBehaviour
     public bool stunned => skipTurnCounter > 0;
     private string json;
     private int skipTurnCounter;
+    private List<int> unrollables;
 
     private void Start()
     {
@@ -37,6 +38,7 @@ public class CombatHandler : MonoBehaviour
         inventory.AddItem(new StarterShield());
         LoadInventory();
         skipTurnCounter = 0;
+        unrollables = new List<int>();
     }
 
     public void TakeTurn()
@@ -51,6 +53,26 @@ public class CombatHandler : MonoBehaviour
         }
         if (actionPoints > maxActionPoints)
             actionPoints = maxActionPoints;
+    }
+
+    public void PassiveItems()
+    {
+        foreach(Item item in inventory.items)
+        {
+            if(item.GetEffect().Equals("Passive"))
+            {
+                if(item.GetName().Equals("Weighted Dice") && !unrollables.Contains(item.GetAmount()))
+                {
+                    unrollables.Add(item.GetAmount());
+                } else if(item.GetName().Equals("Magic Dice") && !modifiers.Contains(item.GetAmount()))
+                {
+                    modifiers.Add(item.GetAmount());
+                } else if(item.GetName().Equals("Intmidating Drip"))
+                {
+                    
+                }
+            }
+        }
     }
 
     private void UpdateMaxActionPoints()
@@ -127,13 +149,24 @@ public class CombatHandler : MonoBehaviour
         int sum = 0;
         foreach (Die die in dice)
         {
-            sum += die.Roll();
+            sum += DiceRoll(die);
         }
         foreach (int modifier in modifiers)
         {
             sum += modifier;
         }
         return sum;
+    }
+
+
+    private int DiceRoll(Die die)
+    {
+        int roll = die.Roll();
+        if(unrollables.Contains(roll))
+        {
+            DiceRoll(die);
+        }
+        return roll;
     }
 
     public void SaveInventory()

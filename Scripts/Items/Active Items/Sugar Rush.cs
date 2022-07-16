@@ -11,5 +11,7 @@ public class SugarRush : Item
         description = "Double your points. Skip your next turn.";
         cost = 1;
         amount = 2;
+        diceSides = 0;
+        uses = -1;
     }
 }

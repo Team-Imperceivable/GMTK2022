@@ -11,6 +11,8 @@ public class MadDice : Item
         description = "Throw away a random dice at an enemy";
         cost = 1;
         amount = 20;
+        diceSides = 0;
+        uses = -1;
     }
 }
 

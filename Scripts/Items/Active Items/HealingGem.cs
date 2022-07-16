@@ -11,5 +11,7 @@ public class HealingGem : Item
         description = "Oooo shiny";
         cost = 4;
         amount = 1;
+        diceSides = 0;
+        uses = -1;
     }
 }

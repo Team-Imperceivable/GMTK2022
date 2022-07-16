@@ -11,6 +11,8 @@ public class GamblingAddict : Item
         description = "Roll a 2d8";
         cost = 9;
         amount = 2;
+        diceSides = 8;
+        uses = -1;
     }
 }
 

@@ -23,7 +23,12 @@ public class Item
 
     public void UseItem()
     {
-
+        if (uses == 0)
+            return;
+        if (uses > 0)
+        {
+            uses--;
+        }    
     }
 
     public int GetCost()

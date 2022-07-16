@@ -10,7 +10,9 @@ public class DiceBag : Item
         effect = "Dice";
         description = "Gain a temperary d6 for this combat";
         cost = 6;
-        amount = 6;
+        amount = 1;
+        diceSides = 6;
+        uses = -1;
     }
 }
 
