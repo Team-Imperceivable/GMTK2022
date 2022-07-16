@@ -37,7 +37,7 @@ public class CombatHandler : MonoBehaviour
 
         inventory = new Inventory();
 
-        inventory.AddItem(new MadDice());
+        inventory.AddItem(new StarterSword());
         inventory.AddItem(new StarterShield());
         LoadInventory();
         skipTurnCounter = 0;

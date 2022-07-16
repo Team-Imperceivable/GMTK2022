@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeightedDice : Item
+public class LoadedDice : Item
 {
-    public WeightedDice()
+    public LoadedDice()
     {
-        name = "Weighted Dice";
+        name = "Loaded Dice";
         effect = "Passive";
         description = "You cannot roll 1s";
         cost = 0;

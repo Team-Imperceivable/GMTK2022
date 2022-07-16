@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private CombatHandler combatHandler;
     public int money;
+    public bool updateHotbar = false;
     private FrameInputs inputs;
 
     public int selectedItemSlot;
@@ -21,6 +22,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(updateHotbar)
+        {
+            updateHotbar = false;
+        }
         GatherInputs();
         CheckSelect();  
     }
@@ -34,7 +39,7 @@ public class PlayerController : MonoBehaviour
         {
             Collider2D[] hitColliders = Physics2D.OverlapPointAll(inputs.mousePos);
             
-            if((hitColliders.Length > 0))
+            if((hitColliders.Length > 0) && hitColliders[0] != null)
             {
                 if (hitColliders[0].tag.Equals("Shop"))
                 {
@@ -50,7 +55,8 @@ public class PlayerController : MonoBehaviour
                         }
                     } else if (hitObjName[0] == 'I')
                     {
-                        int shopItemSlot = (int)hitObjName[hitObjName.Length - 1];
+                        int shopItemSlot = System.Int32.Parse(hitObjName[hitObjName.Length - 1].ToString());
+                        Debug.Log(shopItemSlot);
                         ShopItem itemInShop = itemShop.GetItemInSlot(shopItemSlot);
                         if (itemInShop.cost <= money)
                         {
@@ -58,19 +64,19 @@ public class PlayerController : MonoBehaviour
                             Item boughtItem = itemShop.BuyItem(shopItemSlot);
                             if (!combatHandler.AddItemToInventory(boughtItem))
                             {
-                                combatHandler.ReplaceItem(selectedItemSlot, boughtItem);
+                                combatHandler.ReplaceItem(selectedItemSlot - 1, boughtItem);
                             }
+                            updateHotbar = true;
                         }
                     }
                 }
                 else if (selectedItemSlot != 0 && !doneWithTurn)
                 {
-                    if (hitColliders.Length > 0)
-                        combatHandler.UseItem(selectedItemSlot, hitColliders[0].gameObject);
-                    else
-                        combatHandler.UseItem(selectedItemSlot, null);
+                    combatHandler.UseItem(selectedItemSlot, hitColliders[0].gameObject);
                 } 
-            } 
+            }
+            else if(selectedItemSlot != 0 && !doneWithTurn)
+                combatHandler.UseItem(selectedItemSlot, null);
         }
     }
 

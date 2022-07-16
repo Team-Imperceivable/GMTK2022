@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Die : Item
+public class Die
 {
     private List<int> sides;
     public Die(List<int> sidesOfDice)

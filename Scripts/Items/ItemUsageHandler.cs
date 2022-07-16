@@ -17,30 +17,35 @@ public class ItemUsageHandler : MonoBehaviour, IPointerClickHandler
 
     private List<Sprite> itemSprites;
     private Item itemInSlot;
+    private bool firstImageLoad;
 
     public void OnPointerClick(PointerEventData data)
     {
         playerController.SelectItem(System.Int32.Parse(gameObject.name));
-        Item itemCopy = itemInSlot;
-        itemInSlot = playerController.SlotToItemName(System.Int32.Parse(gameObject.name));
-        if (itemCopy != itemInSlot)
-        {
-            UpdateSprite();
-        }
-        UpdateColor();
     }
 
     private void Start()
     {
+        firstImageLoad = false;
         myRect = gameObject.GetComponent<RectTransform>();
         itemImage = gameObject.GetComponent<Image>();
-        UpdateColor();
-        UpdateSprite();
     }
 
     private void Update()
     {
-        if(gameObject.name.Equals(playerController.selectedItemSlot.ToString()))
+        itemInSlot = playerController.SlotToItemName(System.Int32.Parse(gameObject.name));
+        if (!firstImageLoad)
+        {
+            firstImageLoad = true;
+            UpdateColor();
+            UpdateSprite();
+        }
+        if(playerController.updateHotbar)
+        {
+            UpdateColor();
+            UpdateSprite();
+        }
+        if (gameObject.name.Equals(playerController.selectedItemSlot.ToString()))
         {
             backgroundImage.sprite = backgroundSelectedSprite;
         } else
@@ -51,6 +56,7 @@ public class ItemUsageHandler : MonoBehaviour, IPointerClickHandler
 
     private void UpdateSprite()
     {
+        itemInSlot = playerController.SlotToItemName(System.Int32.Parse(gameObject.name));
         if(itemInSlot != null)
             itemImage.sprite = Resources.Load<Sprite>("Sprites/Items/" + itemInSlot.GetName());
     }
