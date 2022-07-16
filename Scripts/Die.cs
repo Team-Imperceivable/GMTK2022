@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Die
 {
-    public List<int> sides;
+    private List<int> sides;
     public Die(List<int> sidesOfDice)
     {
         sides = sidesOfDice;

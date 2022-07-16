@@ -6,7 +6,7 @@ using System.IO;
 [System.Serializable]
 public class Inventory
 {
-    Item[] items;
+    public Item[] items;
     public Inventory(Item[] inventoryItems)
     {
         items = new Item[5];

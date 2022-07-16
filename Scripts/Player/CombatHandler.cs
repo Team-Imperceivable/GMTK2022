@@ -13,10 +13,11 @@ public class CombatHandler : MonoBehaviour
     [SerializeField] private List<Die> dice;
     [Header("DICE -NORMAL-")]
     [SerializeField] private List<int> numSides;
-    private Inventory inventory;
 
-    private int maxActionPoints;
-    private bool takingTurn;
+    private Inventory inventory;
+    public int maxActionPoints;
+
+    private string json;
 
     private void Start()
     {
@@ -32,20 +33,19 @@ public class CombatHandler : MonoBehaviour
         }
         UpdateMaxActionPoints();
         actionPoints = 0;
+
         inventory = new Inventory();
+
+        inventory.AddItem(new StarterSword());
+        inventory.AddItem(new StarterShield());
+        LoadInventory();
     }
 
-    private void TakeTurn()
+    public void TakeTurn()
     {
         actionPoints += RollDice();
         if (actionPoints > maxActionPoints)
             actionPoints = maxActionPoints;
-        takingTurn = true;
-    }
-
-    public void SetTurn(bool turnState)
-    {
-        takingTurn = turnState;
     }
 
     private void UpdateMaxActionPoints()
@@ -60,7 +60,7 @@ public class CombatHandler : MonoBehaviour
 
     public void DealDamage(int amount, GameObject target)
     {
-        target.GetComponent<CombatHandler>().TakeDamage(amount);
+        target.GetComponent<EnemyCombatHandler>().TakeDamage(amount);
         Debug.Log(gameObject.name + " dealth " + amount + " damage to " + target.name + "!");
     }
     public void TakeDamage(int amount)
@@ -80,5 +80,27 @@ public class CombatHandler : MonoBehaviour
             sum += modifier;
         }
         return sum;
+    }
+
+    public void SaveInventory()
+    {
+        json = JsonUtility.ToJson(inventory);
+    }
+
+    public void LoadInventory()
+    {
+        JsonUtility.FromJsonOverwrite(json, inventory);
+    }
+
+    public void UseItem(int itemSlot, GameObject target)
+    {
+        Item item = inventory.items[itemSlot - 1];
+        if (item == null || item.GetCost() > actionPoints)
+            return;
+        if(item.GetEffect().Equals("Damage"))
+        {
+            DealDamage(item.GetAmount(), target);
+            actionPoints -= item.GetCost();
+        }
     }
 }
