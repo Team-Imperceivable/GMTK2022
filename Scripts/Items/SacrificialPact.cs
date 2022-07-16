@@ -10,7 +10,7 @@ public class SacrificialPact : Item
         effect = "Pact";
         description = "Exchange health for d6s";
         cost = 2;
-        amount = 1;
+        amount = 6;
     }
 }
 

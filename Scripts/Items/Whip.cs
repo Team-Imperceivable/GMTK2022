@@ -12,4 +12,8 @@ public class Whip : Item
         cost = 5;
         amount = 1;
     }
+    new void UseItem()
+    {
+        amount += 2;
+    }
 }

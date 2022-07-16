@@ -19,6 +19,6 @@ public class EnemyController : MonoBehaviour
 
     public void TakeTurn()
     {
-        BroadcastMessage("AttackPlayer");   
+        BroadcastMessage("TakeEnemyTurn");   
     }
 }

@@ -10,7 +10,7 @@ public class GamblingAddict : Item
         effect = "Dice";
         description = "Roll a d8";
         cost = 5;
-        amount = 1;
+        amount = 8;
     }
 }
 

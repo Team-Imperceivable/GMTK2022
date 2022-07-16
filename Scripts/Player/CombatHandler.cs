@@ -18,18 +18,14 @@ public class CombatHandler : MonoBehaviour
     public int maxActionPoints;
 
     private string json;
+    private int skipTurnCounter;
 
     private void Start()
     {
         health = maxHealth;
         foreach (int num in numSides)
         {
-            List<int> diceSides = new List<int>();
-            for (int i = 1; i <= num; i++)
-            {
-                diceSides.Add(i);
-            }
-            dice.Add(new Die(diceSides));
+            dice.Add(new Die(CreateNumList(num)));
         }
         UpdateMaxActionPoints();
         actionPoints = 0;
@@ -39,12 +35,19 @@ public class CombatHandler : MonoBehaviour
         inventory.AddItem(new StarterSword());
         inventory.AddItem(new StarterShield());
         LoadInventory();
+        skipTurnCounter = 0;
     }
 
     public void TakeTurn()
     {
         armor = 0;
-        actionPoints += RollDice();
+        if(skipTurnCounter == 0)
+        {
+            actionPoints += RollDice();
+        } else
+        {
+            skipTurnCounter--;
+        }
         if (actionPoints > maxActionPoints)
             actionPoints = maxActionPoints;
     }
@@ -59,7 +62,7 @@ public class CombatHandler : MonoBehaviour
         maxActionPoints *= 2;
     }
 
-    public void DealDamage(int amount, GameObject target)
+    private void DealDamage(int amount, GameObject target)
     {
         target.GetComponent<EnemyCombatHandler>().TakeDamage(amount);
         Debug.Log(gameObject.name + " dealt " + amount + " damage to " + target.name + "!");
@@ -72,6 +75,42 @@ public class CombatHandler : MonoBehaviour
         {
             health = combined;
         }
+    }
+
+    private void HealTarget(int amount, GameObject target)
+    {
+        EnemyCombatHandler enemyCombatHandler = target.GetComponent<EnemyCombatHandler>();
+        CombatHandler combatHandler = target.GetComponent<CombatHandler>();
+        if(enemyCombatHandler != null)
+        {
+            enemyCombatHandler.HealAmount(amount);
+        } else if(combatHandler != null)
+        {
+            combatHandler.HealAmount(amount);
+        }
+    }
+    public void HealAmount(int amount)
+    {
+        health += amount;
+        if (maxHealth < health)
+            health = maxHealth;
+    }
+    private void StunTarget(int amount, GameObject target)
+    {
+        EnemyCombatHandler enemyCombatHandler = target.GetComponent<EnemyCombatHandler>();
+        CombatHandler combatHandler = target.GetComponent<CombatHandler>();
+        if (enemyCombatHandler != null)
+        {
+            enemyCombatHandler.StunAmount(amount);
+        }
+        else if (combatHandler != null)
+        {
+            combatHandler.StunAmount(amount);
+        }
+    }
+    public void StunAmount(int amount)
+    {
+        skipTurnCounter += amount;
     }
 
     private int RollDice()
@@ -109,6 +148,20 @@ public class CombatHandler : MonoBehaviour
         {
             armor += item.GetAmount();
             actionPoints -= item.GetCost();
+        } else if(item.GetEffect().Equals("Dice"))
+        {
+            Die diceToRoll = new Die(CreateNumList(item.GetAmount()));
+            actionPoints += diceToRoll.Roll();
+            actionPoints -= item.GetCost();
+        } else if(item.GetEffect().Equals("Pact"))
+        {
+            Die diceToRoll = new Die(CreateNumList(item.GetAmount()));
+            actionPoints += diceToRoll.Roll();
+            health -= item.GetCost();
+        } else if(item.GetEffect().Equals("Multiply"))
+        {
+            skipTurnCounter += item.GetCost();
+            actionPoints *= item.GetAmount();
         }
         if (target != null)
         {
@@ -116,7 +169,25 @@ public class CombatHandler : MonoBehaviour
             {
                 DealDamage(item.GetAmount(), target);
                 actionPoints -= item.GetCost();
+            } else if(item.GetEffect().Equals("Heal"))
+            {
+                HealTarget(item.GetAmount(), target);
+                actionPoints -= item.GetCost();
+            } else if(item.GetEffect().Equals("Stun"))
+            {
+
             }
         }
+        item.UseItem();
+    }
+
+    private List<int> CreateNumList(int num)
+    {
+        List<int> diceSides = new List<int>();
+        for (int i = 1; i <= num; i++)
+        {
+            diceSides.Add(i);
+        }
+        return diceSides;
     }
 }

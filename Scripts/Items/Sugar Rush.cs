@@ -9,7 +9,7 @@ public class SugarRush : Item
         name = "Sugar Rush";
         effect = "Multiply";
         description = "Double your points. Skip your next turn.";
-        cost = 0;
+        cost = 1;
         amount = 2;
     }
 }

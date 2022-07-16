@@ -11,9 +11,12 @@ public class EnemyCombatHandler : MonoBehaviour
     [SerializeField] private int minDamage, maxDamage;
     [SerializeField] private CombatHandler playerCombatHandler;
 
+    private int skipTurnCounter;
+
     private void Start()
     {
         health = maxHealth;
+        skipTurnCounter = 0;
     }
 
     public void RollDamage()
@@ -24,9 +27,32 @@ public class EnemyCombatHandler : MonoBehaviour
     {
         health -= amount;
     }
+    public void HealAmount(int amount)
+    {
+        health += amount;
+        if (maxHealth < health)
+            health = maxHealth;
+    }
 
-    public void AttackPlayer()
+    private void AttackPlayer()
     {
         playerCombatHandler.TakeDamage(nextAttack);
+    }
+
+    public void TakeEnemyTurn()
+    {
+        if(skipTurnCounter == 0)
+        {
+            AttackPlayer();
+        } else
+        {
+            skipTurnCounter--;
+        }
+        
+    }
+
+    public void StunAmount(int amount)
+    {
+        skipTurnCounter += amount;
     }
 }
