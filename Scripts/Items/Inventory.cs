@@ -21,21 +21,22 @@ public class Inventory
         items = new Item[5];
     }
 
-    public void AddItem(Item item)
+    public bool AddItem(Item item)
     {
         for(int i = 0; i < 5; i++)
         {
             if (items[i] == null)
             {
                 items[i] = item;
-                return;
+                return true;
             }
         }
+        return false;
     }
 
     public Item RemoveItem(Item item)
     {
-        for(int i = 0; i < 5; i++)
+        for (int i = 0; i < 5; i++)
         {
             if (items[i] == item)
             {

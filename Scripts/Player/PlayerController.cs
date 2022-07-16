@@ -34,13 +34,43 @@ public class PlayerController : MonoBehaviour
         {
             Collider2D[] hitColliders = Physics2D.OverlapPointAll(inputs.mousePos);
             
-            if(selectedItemSlot != 0 && !doneWithTurn)
+            if((hitColliders.Length > 0))
             {
-                if (hitColliders.Length > 0)
-                    combatHandler.UseItem(selectedItemSlot, hitColliders[0].gameObject);
-                else
-                    combatHandler.UseItem(selectedItemSlot, null);
-            }
+                if (hitColliders[0].tag.Equals("Shop"))
+                {
+                    char[] hitObjName = hitColliders[0].name.ToCharArray();
+                    ShopHandler itemShop = hitColliders[0].GetComponentInParent<ShopHandler>();
+                    if (hitObjName[0] == 'D')
+                    {
+                        if (itemShop.GetItemInSlot(0).cost <= money)
+                        {
+                            Die boughtDie = itemShop.BuyDie();
+                            combatHandler.AddDie(boughtDie);
+                            money -= boughtDie.MaxRoll();
+                        }
+                    } else if (hitObjName[0] == 'I')
+                    {
+                        int shopItemSlot = (int)hitObjName[hitObjName.Length - 1];
+                        ShopItem itemInShop = itemShop.GetItemInSlot(shopItemSlot);
+                        if (itemInShop.cost <= money)
+                        {
+                            money -= itemInShop.cost;
+                            Item boughtItem = itemShop.BuyItem(shopItemSlot);
+                            if (!combatHandler.AddItemToInventory(boughtItem))
+                            {
+                                combatHandler.ReplaceItem(selectedItemSlot, boughtItem);
+                            }
+                        }
+                    }
+                }
+                else if (selectedItemSlot != 0 && !doneWithTurn)
+                {
+                    if (hitColliders.Length > 0)
+                        combatHandler.UseItem(selectedItemSlot, hitColliders[0].gameObject);
+                    else
+                        combatHandler.UseItem(selectedItemSlot, null);
+                } 
+            } 
         }
     }
 
