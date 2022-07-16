@@ -9,9 +9,18 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        Debug.Log("Start");
         SceneManager.LoadScene("SampleScene");
         menuCanvas.enabled = true;
+    }
+
+    public void ShowOptions()
+    {
+
+    }
+
+    public void ShowCredits()
+    {
+
     }
 
     public void QuitGame()
