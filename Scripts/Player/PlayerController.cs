@@ -7,9 +7,10 @@ public class PlayerController : MonoBehaviour
     public bool doneWithTurn;
 
     [SerializeField] private CombatHandler combatHandler;
+    public int money;
     private FrameInputs inputs;
 
-    private int selectedItemSlot;
+    public int selectedItemSlot;
 
     // Start is called before the first frame update
     void Start()
@@ -68,5 +69,15 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(selectableBounds.center, selectableBounds.size);
+    }
+
+    public void AddItem(Item item)
+    {
+        combatHandler.AddItemToInventory(item);
+    }
+
+    public Item SlotToItemName(int slot)
+    {
+        return combatHandler.GetInventory().items[slot - 1];
     }
 }

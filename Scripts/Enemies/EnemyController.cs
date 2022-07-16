@@ -7,7 +7,7 @@ public class EnemyController : MonoBehaviour
     public int encounterNumber;
     public int lastEncounterNumber;
     public bool doneWithTurn;
-
+    [SerializeField] private PlayerController playerController;
     private EncounterManager activeEncounter;
 
     // Start is called before the first frame update
@@ -42,5 +42,15 @@ public class EnemyController : MonoBehaviour
             activeEncounter = encounter;
             encounter.SetEncounterActive(true);
         }
+    }
+
+    public void GivePlayerMoney(int amount)
+    {
+        playerController.money += amount;
+    }
+
+    public void GivePlayerItem(Item item)
+    {
+        playerController.AddItem(item);
     }
 }

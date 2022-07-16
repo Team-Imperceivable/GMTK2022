@@ -22,6 +22,9 @@ public class CombatHandler : MonoBehaviour
     private int skipTurnCounter;
     private List<int> unrollables;
 
+    private bool canMultiply;
+    private bool canReroll;
+
     private void Start()
     {
         health = maxHealth;
@@ -34,7 +37,7 @@ public class CombatHandler : MonoBehaviour
 
         inventory = new Inventory();
 
-        inventory.AddItem(new StarterSword());
+        inventory.AddItem(new MadDice());
         inventory.AddItem(new StarterShield());
         LoadInventory();
         skipTurnCounter = 0;
@@ -44,6 +47,8 @@ public class CombatHandler : MonoBehaviour
     public void TakeTurn()
     {
         armor = 0;
+        canMultiply = true;
+        canReroll = true;
         if(skipTurnCounter == 0)
         {
             actionPoints += RollDice();
@@ -200,10 +205,20 @@ public class CombatHandler : MonoBehaviour
             Die diceToRoll = new Die(CreateNumList(item.GetAmount()));
             actionPoints += diceToRoll.Roll();
             health -= item.GetCost();
-        } else if(item.GetEffect().Equals("Multiply"))
+        } else if(item.GetEffect().Equals("Multiply") && canMultiply)
         {
             skipTurnCounter += item.GetCost();
             actionPoints *= item.GetAmount();
+            canMultiply = false;
+        } else if(item.GetEffect().Equals("Reroll") && canReroll)
+        {
+            if(item.GetName().Equals("Mulligan") && item.GetUses() > 0)
+            {
+                actionPoints = RollDice();
+            } else
+            {
+                actionPoints = RollDice();
+            }
         }
         if (target != null)
         {
@@ -221,6 +236,7 @@ public class CombatHandler : MonoBehaviour
             }
         }
         item.UseItem();
+        canReroll = false;
     }
 
     private List<int> CreateNumList(int num)
@@ -231,5 +247,26 @@ public class CombatHandler : MonoBehaviour
             diceSides.Add(i);
         }
         return diceSides;
+    }
+
+    public void ResetItems()
+    {
+        foreach(Item item in inventory.items)
+        {
+            if(item != null)
+            {
+                item.Reset();
+            }
+        }
+    }
+
+    public void AddItemToInventory(Item item)
+    {
+        inventory.AddItem(item);
+    }
+
+    public Inventory GetInventory()
+    {
+        return inventory;
     }
 }

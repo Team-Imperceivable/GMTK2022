@@ -9,6 +9,7 @@ public class Item
     protected int amount;
     protected int diceSides;
     protected int uses;
+    protected int startAmount, startUses;
 
     public Item()
     {
@@ -19,6 +20,8 @@ public class Item
         amount = 0;
         diceSides = 0;
         uses = -1;
+        startAmount = amount;
+        startUses = uses;
     }
 
     public void UseItem()
@@ -58,5 +61,10 @@ public class Item
     public int GetUses()
     {
         return uses;
+    }
+    public void Reset()
+    {
+        amount = startAmount;
+        uses = startUses;
     }
 }
