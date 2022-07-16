@@ -25,9 +25,11 @@ public class PlayerController : MonoBehaviour
     }
 
     #region Selecting
+    [SerializeField] private Bounds selectableBounds;
+
     private void CheckSelect()
     {
-        if(inputs.select)
+        if(inputs.select && selectableBounds.Contains(inputs.mousePos))
         {
             Collider2D[] hitColliders = Physics2D.OverlapPointAll(inputs.mousePos);
             
@@ -60,5 +62,11 @@ public class PlayerController : MonoBehaviour
             select = Input.GetButtonDown("Fire1"),
             endTurn = Input.GetButtonDown("Jump")
         };
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(selectableBounds.center, selectableBounds.size);
     }
 }

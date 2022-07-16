@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 104048626}
   - component: {fileID: 104048625}
   - component: {fileID: 104048624}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: 4
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 232750308}
   - component: {fileID: 232750310}
   - component: {fileID: 232750309}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Items
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -537,7 +537,7 @@ GameObject:
   - component: {fileID: 739710146}
   - component: {fileID: 739710145}
   - component: {fileID: 739710147}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: 1
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -716,6 +716,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doneWithTurn: 0
   combatHandler: {fileID: 1168054184}
+  selectableBounds:
+    m_Center: {x: 0, y: 2.5, z: 0}
+    m_Extent: {x: 25, y: 7.5, z: 10}
 --- !u!61 &1168054183
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -752,13 +755,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d401d599d7d66443aaac6c4606037d0, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   maxHealth: 12
   health: 0
-  shields: 0
+  armor: 0
   actionPoints: 0
-  modifiers:
+  modifiers: 
   dice: []
   numSides: 06000000
   maxActionPoints: 0
@@ -805,8 +808,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dfa8ec7c0d780184abc54029028ed9c8, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   doneWithTurn: 0
 --- !u!1 &1558954554
 GameObject:
@@ -820,7 +823,7 @@ GameObject:
   - component: {fileID: 1558954558}
   - component: {fileID: 1558954557}
   - component: {fileID: 1558954556}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: 2
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -857,8 +860,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 70d0c1ea12efa854d8c25e96545fefe5, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   playerController: {fileID: 1168054181}
 --- !u!114 &1558954557
 MonoBehaviour:
@@ -870,8 +873,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
@@ -910,7 +913,7 @@ GameObject:
   - component: {fileID: 1564303672}
   - component: {fileID: 1564303671}
   - component: {fileID: 1564303670}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: 5
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -947,8 +950,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 70d0c1ea12efa854d8c25e96545fefe5, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   playerController: {fileID: 1168054181}
 --- !u!114 &1564303671
 MonoBehaviour:
@@ -960,8 +963,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
@@ -1000,7 +1003,7 @@ GameObject:
   - component: {fileID: 1719904979}
   - component: {fileID: 1719904978}
   - component: {fileID: 1719904977}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: 3
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -1037,8 +1040,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 70d0c1ea12efa854d8c25e96545fefe5, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   playerController: {fileID: 1168054181}
 --- !u!114 &1719904978
 MonoBehaviour:
@@ -1050,8 +1053,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
@@ -1200,12 +1203,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e82b0fd64a5eb404e927780c39f1d494, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   maxHealth: 6
   health: 0
   nextAttack: 0
-  modifiers:
+  modifiers: 
   minDamage: 2
   maxDamage: 3
   playerCombatHandler: {fileID: 1168054184}
@@ -1237,8 +1240,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -1256,8 +1259,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
