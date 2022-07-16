@@ -15,15 +15,27 @@ public class ItemUsageHandler : MonoBehaviour, IPointerClickHandler
     private RectTransform myRect;
     private Image itemImage;
 
+    private List<Sprite> itemSprites;
+    private Item itemInSlot;
+
     public void OnPointerClick(PointerEventData data)
     {
         playerController.SelectItem(System.Int32.Parse(gameObject.name));
+        Item itemCopy = itemInSlot;
+        itemInSlot = playerController.SlotToItemName(System.Int32.Parse(gameObject.name));
+        if (itemCopy != itemInSlot)
+        {
+            UpdateSprite();
+        }
+        UpdateColor();
     }
 
     private void Start()
     {
         myRect = gameObject.GetComponent<RectTransform>();
         itemImage = gameObject.GetComponent<Image>();
+        UpdateColor();
+        UpdateSprite();
     }
 
     private void Update()
@@ -35,14 +47,21 @@ public class ItemUsageHandler : MonoBehaviour, IPointerClickHandler
         {
             backgroundImage.sprite = backgroundSprite;
         }
+    }
+
+    private void UpdateSprite()
+    {
+        if(itemInSlot != null)
+            itemImage.sprite = Resources.Load<Sprite>("Sprites/Items/" + itemInSlot.GetName());
+    }
+    private void UpdateColor()
+    {
         Color imgColor = itemImage.color;
-        Item itemInSlot = playerController.SlotToItemName(System.Int32.Parse(gameObject.name));
         if (itemInSlot != null)
         {
-            Texture2D itemTexture = Resources.Load<Texture2D>("Sprites/Items/" + itemInSlot.GetName());
-            itemImage.sprite = Sprite.Create(itemTexture, myRect.rect, Vector2.zero, 0f, 0);
             imgColor.a = 1;
-        } else
+        }
+        else
         {
             imgColor.a = 0;
         }
