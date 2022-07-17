@@ -7,8 +7,8 @@ public class MadDice : Item
     public MadDice()
     {
         name = "Mad Dice";
-        effect = "Damage";
-        description = "Deal 20 damage by throwing away a dice";
+        effect = "Throw";
+        description = "Throw away a random dice at an enemy";
         cost = 1;
         amount = 20;
         diceSides = 0;

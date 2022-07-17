@@ -31,7 +31,6 @@ public class EnemyCombatHandler : MonoBehaviour
         health -= amount;
         if(health <= 0)
         {
-            playerCombatHandler.Reset();
             ThisDies();
         }
     }
@@ -68,6 +67,12 @@ public class EnemyCombatHandler : MonoBehaviour
     {
         playerCombatHandler = player.GetComponent<CombatHandler>();
         RollDamage();
+    }
+
+    public void BuffHealth(int amount)
+    {
+        maxHealth += amount;
+        health += amount;
     }
 
     private void ThisDies()

@@ -45,6 +45,7 @@ public class CombatHandler : MonoBehaviour
     public void TakeTurn()
     {
         armor = 0;
+        PassiveItems();
         canMultiply = true;
         canReroll = true;
         if(skipTurnCounter == 0)
@@ -64,7 +65,7 @@ public class CombatHandler : MonoBehaviour
     {
         foreach(Item item in inventory.items)
         {
-            if(item.GetEffect().Equals("Passive"))
+            if(item != null && item.GetEffect().Equals("Passive"))
             {
                 if(item.GetName().Equals("Weighted Dice") && !unrollables.Contains(item.GetAmount()))
                 {
@@ -74,7 +75,17 @@ public class CombatHandler : MonoBehaviour
                     modifiers.Add(item.GetAmount());
                 } else if(item.GetName().Equals("Intimidating Drip"))
                 {
-                    
+                    GameObject[] enemyArr = GameObject.FindGameObjectsWithTag("Enemy");
+                    if(enemyArr.Length > 0)
+                    {
+                        foreach (GameObject enemy in enemyArr)
+                        {
+                            DealDamage(dice.Count * item.GetAmount(), enemy);
+                        }
+                    }
+                } else if(item.GetName().Equals("Blunt"))
+                {
+                    armor += item.GetAmount();
                 }
             }
         }
@@ -207,6 +218,7 @@ public class CombatHandler : MonoBehaviour
             {
                 actionPoints = RollDice();
             }
+            canReroll = false;
         }
         if (target != null)
         {
@@ -221,12 +233,18 @@ public class CombatHandler : MonoBehaviour
             } else if(item.GetEffect().Equals("Stun"))
             {
                 StunTarget(item.GetAmount(), target, item.GetCost());
+            } else if(item.GetEffect().Equals("Throw"))
+            {
+                DealDamage(item.GetAmount(), target);
+                for(int i = 0; i < item.GetCost(); i++)
+                {
+                    dice.RemoveAt(Random.Range(0, dice.Count));
+                }
             }
         }
         if (actionPoints < 0)
             actionPoints = 0;
         item.UseItem();
-        canReroll = false;
     }
 
     private List<int> CreateNumList(int num)
@@ -251,13 +269,16 @@ public class CombatHandler : MonoBehaviour
         armor = 0;
         canMultiply = true;
         canReroll = true;
+        skipTurnCounter = 0;
         actionPoints = RollDice();
     }
 
     public void FullReset()
     {
         Reset();
-        health = maxHealth;
+        int healthIncrease = Random.Range(1, 7);
+        maxHealth += healthIncrease;
+        health += healthIncrease;
     }
 
     public bool AddItemToInventory(Item item)

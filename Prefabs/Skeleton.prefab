@@ -130,10 +130,10 @@ MonoBehaviour:
   armor: 0
   nextAttack: 0
   modifiers: 
-  minDamage: 2
-  maxDamage: 3
-  minMoney: 1
-  maxMoney: 1
+  minDamage: 1
+  maxDamage: 5
+  minMoney: 2
+  maxMoney: 4
 --- !u!95 &-7877569758082964606
 Animator:
   serializedVersion: 4
