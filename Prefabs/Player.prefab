@@ -265,13 +265,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d401d599d7d66443aaac6c4606037d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 12
+  maxHealth: 40
   health: 0
   armor: 0
   actionPoints: 0
   modifiers: 
   dice: []
-  numSides: 06000000
+  numSides: 0600000006000000
+  dicePrefab: {fileID: 1868032614175915687, guid: 64af00500402aac499562332028a9d79, type: 3}
+  diceStartPos: {x: 20, y: 10, z: 0}
   maxActionPoints: 0
 --- !u!61 &8816044515356608211
 BoxCollider2D:

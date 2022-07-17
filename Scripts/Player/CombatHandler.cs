@@ -13,6 +13,8 @@ public class CombatHandler : MonoBehaviour
     [SerializeField] private List<Die> dice;
     [Header("DICE -NORMAL-")]
     [SerializeField] private List<int> numSides;
+    [SerializeField] private GameObject dicePrefab;
+    [SerializeField] private Vector3 diceStartPos;
 
     private Inventory inventory;
     public int maxActionPoints;
@@ -44,6 +46,7 @@ public class CombatHandler : MonoBehaviour
         unrollables = new List<int>();
 
         sfx = gameObject.GetComponentInChildren<SFXHandler>();
+        previousDice = new List<GameObject>();
     }
 
     public void TakeTurn()
@@ -121,7 +124,7 @@ public class CombatHandler : MonoBehaviour
 
         if(health <= 0)
         {
-            SceneLoader menuLoader = GameObject.Find("Scene Preloader").GetComponent<SceneLoader>();
+            SceneLoader menuLoader = GameObject.Find("Scene Loader").GetComponent<SceneLoader>();
             menuLoader.ChangeToMenu();
         }
     }
@@ -170,12 +173,36 @@ public class CombatHandler : MonoBehaviour
         skipTurnCounter += amount;
     }
 
+    private List<GameObject> previousDice;
     private int RollDice()
     {
-        int sum = 0;
-        foreach (Die die in dice)
+        foreach(GameObject prevDice in previousDice)
         {
-            sum += DiceRoll(die);
+            Destroy(prevDice);
+        }
+        previousDice.Clear();
+
+        int sum = 0;
+        for(int i = 0; i < dice.Count; i++)
+        {
+            if (dice[i] != null)
+            {
+                int roll = DiceRoll(dice[i]);
+                Vector3 dicePos = diceStartPos;
+                dicePos.x -= 6 * i;
+                GameObject obj = Instantiate(dicePrefab, dicePos, transform.rotation);
+                if(obj != null)
+                {
+                    DiceVisuals visuals = obj.GetComponent<DiceVisuals>();
+                    if (visuals != null)
+                    {
+                        visuals.SetType(dice[i].MaxRoll());
+                        visuals.SetRoll(roll);
+                    }
+                    sum += roll;
+                    previousDice.Add(obj);
+                }
+            }
         }
         foreach (int modifier in modifiers)
         {
@@ -198,23 +225,30 @@ public class CombatHandler : MonoBehaviour
     public void UseItem(int itemSlot, GameObject target)
     {
         Item item = inventory.items[itemSlot - 1];
-        if (item == null || item.GetCost() > actionPoints || item.GetUses() == 0)
+        if (item == null || item.GetUses() == 0)
             return;
         Debug.Log(item.GetName());
-        if (item.GetEffect().Equals("Block"))
+        if (item.GetEffect().Equals("Block") && item.GetCost() <= actionPoints)
         {
             armor += item.GetAmount();
             actionPoints -= item.GetCost();
-        } else if(item.GetEffect().Equals("Dice"))
+        } else if(item.GetEffect().Equals("Dice") && item.GetCost() <= actionPoints)
         {
             Die diceToRoll = new Die(CreateNumList(item.GetAmount()));
             actionPoints += diceToRoll.Roll();
             actionPoints -= item.GetCost();
         } else if(item.GetEffect().Equals("Pact"))
         {
-            Die diceToRoll = new Die(CreateNumList(item.GetAmount()));
-            actionPoints += diceToRoll.Roll();
-            health -= item.GetCost();
+            if(health > item.GetCost())
+            {
+                for (int i = 0; i < item.GetAmount(); i++)
+                {
+                    int sides = item.GetDiceSides();
+                    Debug.Log(sides);
+                    actionPoints += Random.Range(1, sides);
+                }
+                health -= item.GetCost();
+            }
         } else if(item.GetEffect().Equals("Multiply") && canMultiply)
         {
             skipTurnCounter += item.GetCost();
@@ -222,7 +256,7 @@ public class CombatHandler : MonoBehaviour
             canMultiply = false;
         } else if(item.GetEffect().Equals("Reroll") && canReroll)
         {
-            if(item.GetName().Equals("Mulligan") && item.GetUses() > 0)
+            if(item.GetName().Equals("Mulligan") && item.GetUses() <= 0)
             {
                 actionPoints = RollDice();
             } else
@@ -233,23 +267,26 @@ public class CombatHandler : MonoBehaviour
         }
         if (target != null)
         {
-            if (item.GetEffect().Equals("Damage") && target != gameObject)
+            if (item.GetEffect().Equals("Damage") && target != gameObject && item.GetCost() <= actionPoints)
             {
                 DealDamage(item.GetAmount(), target);
                 actionPoints -= item.GetCost();
-            } else if(item.GetEffect().Equals("Heal"))
+            } else if(item.GetEffect().Equals("Heal") && item.GetCost() <= actionPoints)
             {
                 HealTarget(item.GetAmount(), target);
                 actionPoints -= item.GetCost();
-            } else if(item.GetEffect().Equals("Stun"))
+            } else if(item.GetEffect().Equals("Stun") && item.GetCost() <= actionPoints)
             {
                 StunTarget(item.GetAmount(), target, item.GetCost());
             } else if(item.GetEffect().Equals("Throw"))
             {
-                DealDamage(item.GetAmount(), target);
-                for(int i = 0; i < item.GetCost(); i++)
+                if (dice.Count >= item.GetCost())
                 {
-                    dice.RemoveAt(Random.Range(0, dice.Count));
+                    DealDamage(item.GetAmount(), target);
+                    for (int i = 0; i < item.GetCost(); i++)
+                    {
+                        dice.RemoveAt(Random.Range(0, dice.Count));
+                    }
                 }
             }
         }
@@ -287,9 +324,9 @@ public class CombatHandler : MonoBehaviour
     public void FullReset()
     {
         Reset();
-        int healthIncrease = Random.Range(1, 7);
-        maxHealth += healthIncrease;
-        health += healthIncrease;
+        health += Random.Range(0, 3);
+        if (health > maxHealth)
+            health = maxHealth;
     }
 
     public bool AddItemToInventory(Item item)

@@ -79,6 +79,17 @@ public class EnemyCombatHandler : MonoBehaviour
         health += amount;
     }
 
+    public void BuffDamage(int amount)
+    {
+        nextAttack += Random.Range(0, amount);
+        maxDamage += amount;
+    }
+
+    public void BuffMoney(int amount)
+    {
+        maxMoney += amount;
+    }
+
     private void ThisDies()
     {
         //Death Animation Goes Here

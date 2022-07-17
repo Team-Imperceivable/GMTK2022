@@ -126,6 +126,8 @@ public class EncounterManager : MonoBehaviour
             if(enemy != transform && enemy.CompareTag("Enemy"))
             {
                 BuffTargetHealth(enemy);
+                BuffTargetDamage(enemy);
+                BuffTargetMoney(enemy);
                 GameObject instantiated = Instantiate(enemyUI, enemy.position, enemy.rotation);
                 instantiated.transform.SetParent(GameObject.Find("Enemy UIs").transform);
                 UIFollowTarget follower = instantiated.GetComponent<UIFollowTarget>();
@@ -143,6 +145,24 @@ public class EncounterManager : MonoBehaviour
         if(enemyCombatHandler != null)
         {
             enemyCombatHandler.BuffHealth(scaling);
+        }
+    }
+
+    private void BuffTargetDamage(Transform target)
+    {
+        EnemyCombatHandler enemyCombatHandler = target.gameObject.GetComponent<EnemyCombatHandler>();
+        if (enemyCombatHandler != null)
+        {
+            enemyCombatHandler.BuffDamage(scaling);
+        }
+    }
+
+    private void BuffTargetMoney(Transform target)
+    {
+        EnemyCombatHandler enemyCombatHandler = target.gameObject.GetComponent<EnemyCombatHandler>();
+        if (enemyCombatHandler != null)
+        {
+            enemyCombatHandler.BuffMoney(scaling);
         }
     }
 

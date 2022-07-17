@@ -131,7 +131,7 @@ MonoBehaviour:
   nextAttack: 0
   modifiers: 
   minDamage: 1
-  maxDamage: 5
+  maxDamage: 4
   minMoney: 2
   maxMoney: 4
 --- !u!95 &-7877569758082964606
