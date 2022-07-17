@@ -8,7 +8,7 @@ public class StarterShield : Item
     {
         name = "Starter Shield";
         effect = "Block";
-        description = "I wouldn't be suprised if this thing broke on first contact.";
+        description = "Block 2";
         cost = 3;
         amount = 2;
         diceSides = 0;

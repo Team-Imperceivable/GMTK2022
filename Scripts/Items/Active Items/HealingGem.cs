@@ -8,7 +8,7 @@ public class HealingGem : Item
     {
         name = "Healing Gem";
         effect = "Heal";
-        description = "Oooo shiny";
+        description = "Heal 1hp";
         cost = 4;
         amount = 1;
         diceSides = 0;

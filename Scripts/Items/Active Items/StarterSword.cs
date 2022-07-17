@@ -8,7 +8,7 @@ public class StarterSword : Item
     {
         name = "Starter Sword";
         effect = "Damage";
-        description = "Does this even qualify as a sword?";
+        description = "Deal 2 damage";
         cost = 3;
         amount = 2;
         diceSides = 0;

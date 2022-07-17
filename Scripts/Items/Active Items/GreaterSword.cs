@@ -8,7 +8,7 @@ public class GreaterSword : Item
     {
         name = "Greater Sword";
         effect = "Damage";
-        description = "Now this is a weapon";
+        description = "Deal 10 damage";
         cost = 7;
         amount = 10;
         diceSides = 0;

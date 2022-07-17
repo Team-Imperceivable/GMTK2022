@@ -8,7 +8,7 @@ public class SacrificialPact : Item
     {
         name = "Sacrificial Pact";
         effect = "Pact";
-        description = "Exchange health for d6s";
+        description = "Roll a d6 at the cost of hp";
         cost = 2;
         amount = 1;
         diceSides = 6;

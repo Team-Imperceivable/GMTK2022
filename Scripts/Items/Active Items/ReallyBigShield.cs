@@ -8,7 +8,7 @@ public class ReallyBigShield : Item
     {
         name = "Really Big Shield";
         effect = "Block";
-        description = "The sprite is scaled down, but its BIG."; // Sprite does not have to be scaled down
+        description = "Block 36 (It's REALLY big)"; // Sprite does not have to be scaled down
         cost = 18;
         amount = 36;
         diceSides = 0;

@@ -8,7 +8,7 @@ public class TheChalice : Item
     {
         name = "The Chalice";
         effect = "Heal";
-        description = "Tastes like pineapple";
+        description = "Heal 3hp";
         cost = 6;
         amount = 3;
         diceSides = 0;
