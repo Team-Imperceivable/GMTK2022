@@ -130,4 +130,4 @@ MonoBehaviour:
   modifiers: 
   minDamage: 2
   maxDamage: 3
-  playerCombatHandler: {fileID: 0}
+  playerPrefab: {fileID: 8816044515356608213, guid: 78dfecce54cb15242bd17481708a725d, type: 3}

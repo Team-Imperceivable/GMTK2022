@@ -44,5 +44,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9baddd859b2351f49893b0947aa98d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 8816044515356608213, guid: 78dfecce54cb15242bd17481708a725d, type: 3}
   targetPosition: {x: 0, y: 0, z: 0}
   slideSpeed: 30
+  encounterPool:
+  - {fileID: 7856906743282911496, guid: d4ac6b0e57808f14c834cc380947d7d4, type: 3}
+  - {fileID: 4800294454686005290, guid: 79641306edae174458ff939608942bb3, type: 3}
+  - {fileID: 974634842598265812, guid: fecb8e73c85699d4c8f31b459ce90baa, type: 3}
+  - {fileID: 7675185254615157434, guid: 2ef756c9e6c184a4bbdb87e860ce0cdb, type: 3}
+  - {fileID: 9169175293074334511, guid: 5da05eb086ba68e4a8897db3d66faa65, type: 3}
+  exclusiveEncounters:
+  - {fileID: 9169175293074334511, guid: 5da05eb086ba68e4a8897db3d66faa65, type: 3}
+  - {fileID: 7675185254615157434, guid: 2ef756c9e6c184a4bbdb87e860ce0cdb, type: 3}
+  maxEnemyNumbers: 1

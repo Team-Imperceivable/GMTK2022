@@ -138,6 +138,11 @@ public class ShopHandler : MonoBehaviour
     {
         SendMessageUpwards("NextEncounter");
     }
+
+    public void RollDamage()
+    {
+        return;
+    }
 }
 
 public class ShopItem

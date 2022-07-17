@@ -58,6 +58,8 @@ public class CombatHandler : MonoBehaviour
         }
         if (actionPoints > maxActionPoints)
             actionPoints = maxActionPoints;
+        if (actionPoints < 0)
+            actionPoints = 0;
     }
 
     public void PassiveItems()
@@ -72,7 +74,7 @@ public class CombatHandler : MonoBehaviour
                 } else if(item.GetName().Equals("Magic Dice") && !modifiers.Contains(item.GetAmount()))
                 {
                     modifiers.Add(item.GetAmount());
-                } else if(item.GetName().Equals("Intmidating Drip"))
+                } else if(item.GetName().Equals("Intimidating Drip"))
                 {
                     
                 }
