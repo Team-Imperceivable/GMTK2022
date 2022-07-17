@@ -190,7 +190,7 @@ public class CombatHandler : MonoBehaviour
         Item item = inventory.items[itemSlot - 1];
         if (item == null || item.GetCost() > actionPoints || item.GetUses() == 0)
             return;
-        
+        Debug.Log(item.GetName());
         if (item.GetEffect().Equals("Block"))
         {
             armor += item.GetAmount();
