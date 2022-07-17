@@ -56,7 +56,6 @@ public class PlayerController : MonoBehaviour
                     } else if (hitObjName[0] == 'I')
                     {
                         int shopItemSlot = System.Int32.Parse(hitObjName[hitObjName.Length - 1].ToString());
-                        Debug.Log(shopItemSlot);
                         ShopItem itemInShop = itemShop.GetItemInSlot(shopItemSlot);
                         if (itemInShop.cost <= money)
                         {
@@ -68,6 +67,9 @@ public class PlayerController : MonoBehaviour
                             }
                             updateHotbar = true;
                         }
+                    } else if (hitObjName[0] == 'N')
+                    {
+                        itemShop.ExitShop();
                     }
                 }
                 else if (selectedItemSlot != 0 && !doneWithTurn)

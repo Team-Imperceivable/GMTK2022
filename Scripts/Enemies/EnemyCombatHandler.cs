@@ -9,10 +9,10 @@ public class EnemyCombatHandler : MonoBehaviour
     public int nextAttack;
     [SerializeField] private List<int> modifiers;
     [SerializeField] private int minDamage, maxDamage;
-    [SerializeField] private CombatHandler playerCombatHandler;
 
     public bool stunned => skipTurnCounter > 0;
     private int skipTurnCounter;
+    public CombatHandler playerCombatHandler;
 
     private void Start()
     {
@@ -29,8 +29,8 @@ public class EnemyCombatHandler : MonoBehaviour
         health -= amount;
         if(health <= 0)
         {
-            playerCombatHandler.ResetItems();
-            SendMessageUpwards("NextEncounter");
+            playerCombatHandler.Reset();
+            ThisDies();
         }
     }
     public void HealAmount(int amount)
@@ -60,5 +60,18 @@ public class EnemyCombatHandler : MonoBehaviour
     public void StunAmount(int amount)
     {
         skipTurnCounter += amount;
+    }
+
+    public void TargetPlayer(GameObject player)
+    {
+        playerCombatHandler = player.GetComponent<CombatHandler>();
+        RollDamage();
+    }
+
+    private void ThisDies()
+    {
+        //Death Animation Goes Here
+        SendMessageUpwards("EnemyDeath");
+        gameObject.SetActive(false);
     }
 }

@@ -58,6 +58,8 @@ public class CombatHandler : MonoBehaviour
         }
         if (actionPoints > maxActionPoints)
             actionPoints = maxActionPoints;
+        if (actionPoints < 0)
+            actionPoints = 0;
     }
 
     public void PassiveItems()
@@ -72,7 +74,7 @@ public class CombatHandler : MonoBehaviour
                 } else if(item.GetName().Equals("Magic Dice") && !modifiers.Contains(item.GetAmount()))
                 {
                     modifiers.Add(item.GetAmount());
-                } else if(item.GetName().Equals("Intmidating Drip"))
+                } else if(item.GetName().Equals("Intimidating Drip"))
                 {
                     
                 }
@@ -93,7 +95,6 @@ public class CombatHandler : MonoBehaviour
     private void DealDamage(int amount, GameObject target)
     {
         target.GetComponent<EnemyCombatHandler>().TakeDamage(amount);
-        Debug.Log(gameObject.name + " dealt " + amount + " damage to " + target.name + "!");
     }
     public void TakeDamage(int amount)
     {
@@ -189,7 +190,6 @@ public class CombatHandler : MonoBehaviour
         Item item = inventory.items[itemSlot - 1];
         if (item == null || item.GetCost() > actionPoints)
             return;
-        Debug.Log(item.GetName());
         
         if (item.GetEffect().Equals("Block"))
         {
@@ -249,7 +249,7 @@ public class CombatHandler : MonoBehaviour
         return diceSides;
     }
 
-    public void ResetItems()
+    public void Reset()
     {
         foreach(Item item in inventory.items)
         {
@@ -258,6 +258,8 @@ public class CombatHandler : MonoBehaviour
                 item.Reset();
             }
         }
+        actionPoints = 0;
+        TakeTurn();
     }
 
     public bool AddItemToInventory(Item item)

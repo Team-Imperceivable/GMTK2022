@@ -64,7 +64,6 @@ public class Item
     }
     public void Reset()
     {
-        amount = startAmount;
-        uses = startUses;
+        
     }
 }
