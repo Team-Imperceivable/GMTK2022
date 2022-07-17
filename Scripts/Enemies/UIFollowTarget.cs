@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIFollowTarget : MonoBehaviour
 {
     [SerializeField] private Vector3 offset;
-    [SerializeField] private Text lifeText;
-    [SerializeField] private Text armorText;
-    [SerializeField] private Text nextAttackText;
+    [SerializeField] private TMP_Text lifeText;
+    [SerializeField] private TMP_Text armorText;
+    [SerializeField] private TMP_Text nextAttackText;
     
     private EnemyCombatHandler enemyCombatHandler;
     private Transform target;

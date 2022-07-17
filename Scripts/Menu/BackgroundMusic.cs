@@ -13,8 +13,6 @@ public class BackgroundMusic : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        DontDestroyOnLoad(gameObject);
-
         if (source == null)
         {
             source = gameObject.GetComponent<AudioSource>();
