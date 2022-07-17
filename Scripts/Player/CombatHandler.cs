@@ -93,7 +93,6 @@ public class CombatHandler : MonoBehaviour
     private void DealDamage(int amount, GameObject target)
     {
         target.GetComponent<EnemyCombatHandler>().TakeDamage(amount);
-        Debug.Log(gameObject.name + " dealt " + amount + " damage to " + target.name + "!");
     }
     public void TakeDamage(int amount)
     {
@@ -189,7 +188,6 @@ public class CombatHandler : MonoBehaviour
         Item item = inventory.items[itemSlot - 1];
         if (item == null || item.GetCost() > actionPoints)
             return;
-        Debug.Log(item.GetName());
         
         if (item.GetEffect().Equals("Block"))
         {
@@ -249,7 +247,7 @@ public class CombatHandler : MonoBehaviour
         return diceSides;
     }
 
-    public void ResetItems()
+    public void Reset()
     {
         foreach(Item item in inventory.items)
         {
@@ -258,6 +256,8 @@ public class CombatHandler : MonoBehaviour
                 item.Reset();
             }
         }
+        actionPoints = 0;
+        TakeTurn();
     }
 
     public bool AddItemToInventory(Item item)

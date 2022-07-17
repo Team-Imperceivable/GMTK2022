@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class EncounterManager : MonoBehaviour
 {
-    Transform[] enemies;
+    [SerializeField] private Vector3 targetPosition;
+    [SerializeField] private float slideSpeed;
+    
+    private Transform[] enemies;
+    private bool sliding;
 
     // Start is called before the first frame update
     void Start()
@@ -14,9 +18,16 @@ public class EncounterManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        if(sliding && transform.position != targetPosition)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, slideSpeed * Time.deltaTime);
+        }
+        if(transform.position == targetPosition)
+        {
+            sliding = false;
+        }
     }
 
     public void SetEncounterActive(bool active)
@@ -26,5 +37,16 @@ public class EncounterManager : MonoBehaviour
         {
             transform.gameObject.SetActive(active);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(targetPosition, 1f);
+    }
+
+    public void SlideToTarget()
+    {
+        sliding = true;
     }
 }

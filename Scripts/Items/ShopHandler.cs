@@ -133,6 +133,11 @@ public class ShopHandler : MonoBehaviour
         dice.gameObject.SetActive(false);
         return toBeReplaced.die;
     }
+
+    public void ExitShop()
+    {
+        SendMessageUpwards("NextEncounter");
+    }
 }
 
 public class ShopItem

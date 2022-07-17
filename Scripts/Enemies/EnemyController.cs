@@ -41,6 +41,8 @@ public class EnemyController : MonoBehaviour
             EncounterManager encounter = encounterObj.GetComponent<EncounterManager>();
             activeEncounter = encounter;
             encounter.SetEncounterActive(true);
+
+            activeEncounter.SlideToTarget();
         }
     }
 

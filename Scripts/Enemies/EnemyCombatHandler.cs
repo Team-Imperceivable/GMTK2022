@@ -29,7 +29,7 @@ public class EnemyCombatHandler : MonoBehaviour
         health -= amount;
         if(health <= 0)
         {
-            playerCombatHandler.ResetItems();
+            //playerCombatHandler.Reset();
             SendMessageUpwards("NextEncounter");
         }
     }
