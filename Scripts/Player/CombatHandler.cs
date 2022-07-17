@@ -44,6 +44,7 @@ public class CombatHandler : MonoBehaviour
 
     public void TakeTurn()
     {
+        PassiveItems();
         armor = 0;
         canMultiply = true;
         canReroll = true;
@@ -64,7 +65,7 @@ public class CombatHandler : MonoBehaviour
     {
         foreach(Item item in inventory.items)
         {
-            if(item.GetEffect().Equals("Passive"))
+            if(item != null && item.GetEffect().Equals("Passive"))
             {
                 if(item.GetName().Equals("Weighted Dice") && !unrollables.Contains(item.GetAmount()))
                 {
@@ -74,7 +75,14 @@ public class CombatHandler : MonoBehaviour
                     modifiers.Add(item.GetAmount());
                 } else if(item.GetName().Equals("Intimidating Drip"))
                 {
-                    
+                    GameObject[] enemyArr = GameObject.FindGameObjectsWithTag("Enemy");
+                    if(enemyArr.Length > 0)
+                    {
+                        foreach (GameObject enemy in enemyArr)
+                        {
+                            DealDamage(dice.Count * item.GetAmount(), enemy);
+                        }
+                    }
                 }
             }
         }
@@ -221,6 +229,13 @@ public class CombatHandler : MonoBehaviour
             } else if(item.GetEffect().Equals("Stun"))
             {
                 StunTarget(item.GetAmount(), target, item.GetCost());
+            } else if(item.GetEffect().Equals("Throw"))
+            {
+                DealDamage(item.GetAmount(), target);
+                for(int i = 0; i < item.GetCost(); i++)
+                {
+                    dice.RemoveAt(Random.Range(0, dice.Count));
+                }
             }
         }
         if (actionPoints < 0)
@@ -251,6 +266,7 @@ public class CombatHandler : MonoBehaviour
         armor = 0;
         canMultiply = true;
         canReroll = true;
+        skipTurnCounter = 0;
         actionPoints = RollDice();
     }
 

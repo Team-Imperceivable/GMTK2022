@@ -12,10 +12,11 @@ public class EncounterManager : MonoBehaviour
     [SerializeField] private int maxEnemyNumbers;
     [SerializeField] private GameObject enemyUI;
 
+    public int enemiesAlive;
+
     private Transform[] enemies;
     private bool sliding;
     private GameObject player;
-    private int enemiesAlive;
     private List<UIFollowTarget> followers;
     private PlayerController pc;
 

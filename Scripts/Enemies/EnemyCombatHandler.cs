@@ -31,7 +31,6 @@ public class EnemyCombatHandler : MonoBehaviour
         health -= amount;
         if(health <= 0)
         {
-            playerCombatHandler.Reset();
             ThisDies();
         }
     }

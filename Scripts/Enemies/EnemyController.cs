@@ -44,8 +44,14 @@ public class EnemyController : MonoBehaviour
 
             activeEncounter.SlideToTarget();
             activeEncounter.GenerateUI();
+            playerController.ResetCombat();
+        } else
+        {
+            //SceneLoader scenePreloader = GameObject.Find("Scene Preloader").GetComponent<SceneLoader>();
+            //scenePreloader.NextScene();
+            playerController.Reset();
         }
-        playerController.ResetCombat();
+        
     }
 
     public void GivePlayerMoney(int amount)
