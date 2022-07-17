@@ -188,7 +188,7 @@ public class CombatHandler : MonoBehaviour
     public void UseItem(int itemSlot, GameObject target)
     {
         Item item = inventory.items[itemSlot - 1];
-        if (item == null || item.GetCost() > actionPoints)
+        if (item == null || item.GetCost() > actionPoints || item.GetUses() == 0)
             return;
         
         if (item.GetEffect().Equals("Block"))
@@ -235,6 +235,8 @@ public class CombatHandler : MonoBehaviour
                 StunTarget(item.GetAmount(), target, item.GetCost());
             }
         }
+        if (actionPoints < 0)
+            actionPoints = 0;
         item.UseItem();
         canReroll = false;
     }
@@ -258,8 +260,16 @@ public class CombatHandler : MonoBehaviour
                 item.Reset();
             }
         }
-        actionPoints = 0;
-        TakeTurn();
+        armor = 0;
+        canMultiply = true;
+        canReroll = true;
+        actionPoints = RollDice();
+    }
+
+    public void FullReset()
+    {
+        Reset();
+        health = maxHealth;
     }
 
     public bool AddItemToInventory(Item item)

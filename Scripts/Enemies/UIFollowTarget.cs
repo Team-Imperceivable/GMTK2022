@@ -8,15 +8,16 @@ public class UIFollowTarget : MonoBehaviour
     [SerializeField] private Vector3 offset;
     [SerializeField] private Text lifeText;
     [SerializeField] private Text armorText;
-
+    
     private EnemyCombatHandler enemyCombatHandler;
     private Transform target;
     private Collider2D targetCollider;
+    private RectTransform myRect;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        myRect = gameObject.GetComponent<RectTransform>();
     }
 
     public void SetTarget(Transform targetTransform)
@@ -34,11 +35,15 @@ public class UIFollowTarget : MonoBehaviour
         offset.y += bounds.size.y / 2;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdatePosition()
     {
-        transform.position = Camera.main.WorldToScreenPoint(target.position) + offset;
-        lifeText.text = enemyCombatHandler.health.ToString() + "/" + enemyCombatHandler.maxHealth.ToString();
+        transform.position = Camera.main.WorldToScreenPoint(target.position + offset);
+        int health = enemyCombatHandler.health;
+        lifeText.text = health.ToString();
         armorText.text = enemyCombatHandler.armor.ToString();
+        if(health <= 0)
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4800294454686005290}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 5, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 1}
+  m_LocalScale: {x: 24, y: 24, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -111,7 +111,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.35, y: 0.35}
+  m_Size: {x: 0.3, y: 0.35}
   m_EdgeRadius: 0
 --- !u!114 &8128928311035344444
 MonoBehaviour:
@@ -127,11 +127,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 6
   health: 0
+  armor: 0
   nextAttack: 0
   modifiers: 
   minDamage: 2
   maxDamage: 3
-  playerCombatHandler: {fileID: 0}
 --- !u!95 &-7877569758082964606
 Animator:
   serializedVersion: 4

@@ -16,6 +16,7 @@ public class EncounterManager : MonoBehaviour
     private bool sliding;
     private GameObject player;
     private int enemiesAlive;
+    private List<UIFollowTarget> followers;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,12 @@ public class EncounterManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         GenerateEncounter();
         gameObject.SetActive(false);
+        followers = new List<UIFollowTarget>();
+    }
+
+    void Update()
+    {
+        UpdateUI();
     }
 
     // Update is called once per frame
@@ -45,6 +52,10 @@ public class EncounterManager : MonoBehaviour
         foreach(Transform transform in enemies)
         {
             transform.gameObject.SetActive(active);
+        }
+        foreach(UIFollowTarget follower in followers)
+        {
+            Destroy(follower.gameObject);
         }
     }
 
@@ -73,12 +84,6 @@ public class EncounterManager : MonoBehaviour
             
             if (enemyCombatHandler != null)
             {
-                GameObject enemyUIObj = Instantiate(enemyUI, instantiatedObject.transform.position, transform.rotation);
-                enemyUIObj.transform.parent = GameObject.Find("Enemy UIs").transform;
-                UIFollowTarget followScript = enemyUIObj.GetComponent<UIFollowTarget>();
-                followScript.SetTarget(instantiatedObject.transform);
-                followScript.SetHandler(enemyCombatHandler);
-                followScript.UpdateOffset(instantiatedObject.GetComponent<Collider2D>().bounds);
                 enemyCombatHandler.TargetPlayer(player);
             }
             if (i == 0)
@@ -99,12 +104,37 @@ public class EncounterManager : MonoBehaviour
         }
     }
 
+    public void GenerateUI()
+    {
+        enemies = gameObject.GetComponentsInChildren<Transform>(true);
+        foreach (Transform enemy in enemies)
+        {
+            if(enemy != transform && enemy.CompareTag("Enemy"))
+            {
+                GameObject instantiated = Instantiate(enemyUI, enemy.position, enemy.rotation);
+                instantiated.transform.SetParent(GameObject.Find("Enemy UIs").transform);
+                UIFollowTarget follower = instantiated.GetComponent<UIFollowTarget>();
+                follower.SetTarget(enemy);
+                follower.SetHandler(enemy.GetComponent<EnemyCombatHandler>());
+                follower.UpdateOffset(enemy.GetComponent<Collider2D>().bounds);
+                followers.Add(follower);
+            }
+        }
+    }
+
     public void EnemyDeath()
     {
         enemiesAlive--;
         if(enemiesAlive == 0)
         {
             SendMessageUpwards("NextEncounter");
+        }
+    }
+    private void UpdateUI()
+    {
+        foreach(UIFollowTarget follower in followers)
+        {
+            follower.UpdatePosition();
         }
     }
 }
