@@ -18,7 +18,6 @@ public class CombatHandler : MonoBehaviour
     public int maxActionPoints;
 
     public bool stunned => skipTurnCounter > 0;
-    private string json;
     private int skipTurnCounter;
     private List<int> unrollables;
 
@@ -39,7 +38,6 @@ public class CombatHandler : MonoBehaviour
 
         inventory.AddItem(new StarterSword());
         inventory.AddItem(new StarterShield());
-        LoadInventory();
         skipTurnCounter = 0;
         unrollables = new List<int>();
     }
@@ -173,16 +171,6 @@ public class CombatHandler : MonoBehaviour
             DiceRoll(die);
         }
         return roll;
-    }
-
-    public void SaveInventory()
-    {
-        json = JsonUtility.ToJson(inventory);
-    }
-
-    public void LoadInventory()
-    {
-        JsonUtility.FromJsonOverwrite(json, inventory);
     }
 
     public void UseItem(int itemSlot, GameObject target)
