@@ -22,43 +22,46 @@ public class SceneLoader : MonoBehaviour
 
     private void PreLoadNextScene()
     {
-        if (this._asyncOperation == null)
+        if (_asyncOperation == null)
             return;
         if(currentIndex == 1 && !preloading)
         {
             Debug.Log("Started Scene Preloading");
             // Start scene preloading.
             currentIndex = 2;
-            this.StartCoroutine(this.LoadSceneAsyncProcess("Gameplay" + currentIndex.ToString()));
+            StartCoroutine(LoadSceneAsyncProcess("Gameplay" + currentIndex.ToString()));
         } else if(currentIndex == 2 && !preloading)
         {
             Debug.Log("Started Scene Preloading");
             // Start scene preloading.
             currentIndex = 1;
-            this.StartCoroutine(this.LoadSceneAsyncProcess("Gameplay" + currentIndex.ToString()));
+            StartCoroutine(LoadSceneAsyncProcess("Gameplay" + currentIndex.ToString()));
         }
         preloading = true;
     }
     public void NextScene()
     {
-        if(this._asyncOperation != null)
+        if(_asyncOperation != null)
         {
             Debug.Log("Allowed Scene Activation");
-            this._asyncOperation.allowSceneActivation = true;
+            _asyncOperation.allowSceneActivation = true;
         }
     }
-
+    public void ReturnToMenu()
+    {
+        
+    }
     private IEnumerator LoadSceneAsyncProcess(string sceneName)
     {
         // Begin to load the Scene you have specified.
-        this._asyncOperation = SceneManager.LoadSceneAsync(sceneName);
+        _asyncOperation = SceneManager.LoadSceneAsync(sceneName);
 
         // Don't let the Scene activate until you allow it to.
-        this._asyncOperation.allowSceneActivation = false;
+        _asyncOperation.allowSceneActivation = false;
 
-        while (!this._asyncOperation.isDone)
+        while (!_asyncOperation.isDone)
         {
-            Debug.Log($"[scene]:{sceneName} [load progress]: {this._asyncOperation.progress}");
+            Debug.Log($"[scene]:{sceneName} [load progress]: {_asyncOperation.progress}");
 
             yield return null;
         }
