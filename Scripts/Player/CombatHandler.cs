@@ -24,6 +24,8 @@ public class CombatHandler : MonoBehaviour
     private bool canMultiply;
     private bool canReroll;
 
+    private SFXHandler sfx;
+
     private void Start()
     {
         health = maxHealth;
@@ -40,6 +42,8 @@ public class CombatHandler : MonoBehaviour
         inventory.AddItem(new StarterShield());
         skipTurnCounter = 0;
         unrollables = new List<int>();
+
+        sfx = gameObject.GetComponentInChildren<SFXHandler>();
     }
 
     public void TakeTurn()
@@ -107,11 +111,18 @@ public class CombatHandler : MonoBehaviour
     }
     public void TakeDamage(int amount)
     {
+        sfx.PlayHit();
         int combined = armor + health;
         combined -= amount;
         if(combined < health)
         {
             health = combined;
+        }
+
+        if(health <= 0)
+        {
+            SceneLoader menuLoader = GameObject.Find("Scene Preloader").GetComponent<SceneLoader>();
+            menuLoader.ChangeToMenu();
         }
     }
 

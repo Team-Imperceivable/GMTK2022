@@ -16,10 +16,13 @@ public class EnemyCombatHandler : MonoBehaviour
     private int skipTurnCounter;
     private CombatHandler playerCombatHandler;
 
+    private SFXHandler sfx;
+
     private void Start()
     {
         health = maxHealth;
         skipTurnCounter = 0;
+        sfx = playerCombatHandler.GetComponentInChildren<SFXHandler>();
     }
 
     public void RollDamage()
@@ -28,6 +31,7 @@ public class EnemyCombatHandler : MonoBehaviour
     }
     public void TakeDamage(int amount)
     {
+        sfx.PlayEnemyHit();
         health -= amount;
         if(health <= 0)
         {

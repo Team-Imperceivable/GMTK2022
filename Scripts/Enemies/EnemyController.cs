@@ -47,9 +47,8 @@ public class EnemyController : MonoBehaviour
             playerController.ResetCombat();
         } else
         {
-            //SceneLoader scenePreloader = GameObject.Find("Scene Preloader").GetComponent<SceneLoader>();
-            //scenePreloader.NextScene();
-            playerController.Reset();
+            SceneLoader menuLoader = GameObject.Find("Scene Preloader").GetComponent<SceneLoader>();
+            menuLoader.ChangeToMenu();
         }
         
     }

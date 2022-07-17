@@ -8,15 +8,35 @@ public class SFXHandler : MonoBehaviour
     [SerializeField] private AudioClip enemyDamaged;
     [SerializeField] private AudioClip enemyDeath;
     [SerializeField] private AudioClip click;
-    // Start is called before the first frame update
-    void Start()
+
+    private AudioSource source;
+
+    private void Start()
     {
-        
+        source = gameObject.GetComponent<AudioSource>();
+    }
+    
+    public void PlayClick()
+    {
+        source.clip = click;
+        source.Play();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlayEnemyHit()
     {
-        
+        source.clip = enemyDamaged;
+        source.Play();
+    }
+
+    public void PlayEnemyDeath()
+    {
+        source.clip = enemyDeath;
+        source.Play();
+    }
+
+    public void PlayHit()
+    {
+        source.clip = playerDamaged;
+        source.Play();
     }
 }
