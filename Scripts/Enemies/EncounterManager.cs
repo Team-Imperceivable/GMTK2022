@@ -10,6 +10,7 @@ public class EncounterManager : MonoBehaviour
     [SerializeField] private List<GameObject> encounterPool;
     [SerializeField] private List<GameObject> exclusiveEncounters;
     [SerializeField] private int maxEnemyNumbers;
+    [SerializeField] private GameObject enemyUI;
 
     private Transform[] enemies;
     private bool sliding;
@@ -69,8 +70,17 @@ public class EncounterManager : MonoBehaviour
             GameObject instantiatedObject = Instantiate(selected, startPos, transform.rotation);
             instantiatedObject.transform.parent = transform;
             EnemyCombatHandler enemyCombatHandler = instantiatedObject.GetComponent<EnemyCombatHandler>();
+            
             if (enemyCombatHandler != null)
+            {
+                GameObject enemyUIObj = Instantiate(enemyUI, instantiatedObject.transform.position, transform.rotation);
+                enemyUIObj.transform.parent = GameObject.Find("Enemy UIs").transform;
+                UIFollowTarget followScript = enemyUIObj.GetComponent<UIFollowTarget>();
+                followScript.SetTarget(instantiatedObject.transform);
+                followScript.SetHandler(enemyCombatHandler);
+                followScript.UpdateOffset(instantiatedObject.GetComponent<Collider2D>().bounds);
                 enemyCombatHandler.TargetPlayer(player);
+            }
             if (i == 0)
             {
                 if (exclusiveEncounters.Contains(selected))

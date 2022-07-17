@@ -6,13 +6,14 @@ public class EnemyCombatHandler : MonoBehaviour
 {
     public int maxHealth;
     public int health;
+    public int armor;
     public int nextAttack;
     [SerializeField] private List<int> modifiers;
     [SerializeField] private int minDamage, maxDamage;
 
     public bool stunned => skipTurnCounter > 0;
     private int skipTurnCounter;
-    public CombatHandler playerCombatHandler;
+    private CombatHandler playerCombatHandler;
 
     private void Start()
     {
