@@ -44,8 +44,8 @@ public class CombatHandler : MonoBehaviour
 
     public void TakeTurn()
     {
-        PassiveItems();
         armor = 0;
+        PassiveItems();
         canMultiply = true;
         canReroll = true;
         if(skipTurnCounter == 0)
@@ -83,6 +83,9 @@ public class CombatHandler : MonoBehaviour
                             DealDamage(dice.Count * item.GetAmount(), enemy);
                         }
                     }
+                } else if(item.GetName().Equals("Blunt"))
+                {
+                    armor += item.GetAmount();
                 }
             }
         }
@@ -215,6 +218,7 @@ public class CombatHandler : MonoBehaviour
             {
                 actionPoints = RollDice();
             }
+            canReroll = false;
         }
         if (target != null)
         {
@@ -241,7 +245,6 @@ public class CombatHandler : MonoBehaviour
         if (actionPoints < 0)
             actionPoints = 0;
         item.UseItem();
-        canReroll = false;
     }
 
     private List<int> CreateNumList(int num)
@@ -273,7 +276,9 @@ public class CombatHandler : MonoBehaviour
     public void FullReset()
     {
         Reset();
-        health = maxHealth;
+        int healthIncrease = Random.Range(1, 7);
+        maxHealth += healthIncrease;
+        health += healthIncrease;
     }
 
     public bool AddItemToInventory(Item item)

@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour
 
     public void ResetCombat()
     {
-        combatHandler.Reset();
+        combatHandler.FullReset();
     }
     public void Reset()
     {

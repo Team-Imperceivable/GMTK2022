@@ -69,6 +69,12 @@ public class EnemyCombatHandler : MonoBehaviour
         RollDamage();
     }
 
+    public void BuffHealth(int amount)
+    {
+        maxHealth += amount;
+        health += amount;
+    }
+
     private void ThisDies()
     {
         //Death Animation Goes Here

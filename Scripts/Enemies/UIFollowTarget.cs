@@ -8,6 +8,7 @@ public class UIFollowTarget : MonoBehaviour
     [SerializeField] private Vector3 offset;
     [SerializeField] private Text lifeText;
     [SerializeField] private Text armorText;
+    [SerializeField] private Text nextAttackText;
     
     private EnemyCombatHandler enemyCombatHandler;
     private Transform target;
@@ -41,6 +42,7 @@ public class UIFollowTarget : MonoBehaviour
         int health = enemyCombatHandler.health;
         lifeText.text = health.ToString();
         armorText.text = enemyCombatHandler.armor.ToString();
+        nextAttackText.text = enemyCombatHandler.nextAttack.ToString();
         if(health <= 0)
         {
             gameObject.SetActive(false);

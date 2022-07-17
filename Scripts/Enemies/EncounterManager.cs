@@ -9,7 +9,7 @@ public class EncounterManager : MonoBehaviour
     [SerializeField] private float slideSpeed;
     [SerializeField] private List<GameObject> encounterPool;
     [SerializeField] private List<GameObject> exclusiveEncounters;
-    [SerializeField] private int maxEnemyNumbers;
+    [SerializeField] private int maxEnemyNumbers, minEnemyNumbers;
     [SerializeField] private GameObject enemyUI;
 
     public int enemiesAlive;
@@ -19,6 +19,8 @@ public class EncounterManager : MonoBehaviour
     private GameObject player;
     private List<UIFollowTarget> followers;
     private PlayerController pc;
+
+    private int scaling;
 
     // Start is called before the first frame update
     void Start()
@@ -62,6 +64,11 @@ public class EncounterManager : MonoBehaviour
         }
     }
 
+    public void ApplyScaling(int amount)
+    {
+        scaling = amount;
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.white;
@@ -75,7 +82,7 @@ public class EncounterManager : MonoBehaviour
 
     public void GenerateEncounter()
     {
-        enemiesAlive = Random.Range(1, maxEnemyNumbers + 1);
+        enemiesAlive = Random.Range(minEnemyNumbers, maxEnemyNumbers + 1);
         for(int i = 0; i < enemiesAlive; i++)
         {
             GameObject selected = encounterPool[Random.Range(0, encounterPool.Count)];
@@ -116,6 +123,7 @@ public class EncounterManager : MonoBehaviour
         {
             if(enemy != transform && enemy.CompareTag("Enemy"))
             {
+                BuffTargetHealth(enemy);
                 GameObject instantiated = Instantiate(enemyUI, enemy.position, enemy.rotation);
                 instantiated.transform.SetParent(GameObject.Find("Enemy UIs").transform);
                 UIFollowTarget follower = instantiated.GetComponent<UIFollowTarget>();
@@ -124,6 +132,15 @@ public class EncounterManager : MonoBehaviour
                 follower.UpdateOffset(enemy.GetComponent<Collider2D>().bounds);
                 followers.Add(follower);
             }
+        }
+    }
+
+    private void BuffTargetHealth(Transform target)
+    {
+        EnemyCombatHandler enemyCombatHandler = target.gameObject.GetComponent<EnemyCombatHandler>();
+        if(enemyCombatHandler != null)
+        {
+            enemyCombatHandler.BuffHealth(scaling);
         }
     }
 

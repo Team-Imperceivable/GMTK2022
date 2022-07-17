@@ -125,15 +125,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82b0fd64a5eb404e927780c39f1d494, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 6
+  maxHealth: 8
   health: 0
   armor: 0
   nextAttack: 0
   modifiers: 
-  minDamage: 2
-  maxDamage: 3
-  minMoney: 1
-  maxMoney: 1
+  minDamage: 1
+  maxDamage: 2
+  minMoney: 3
+  maxMoney: 3
 --- !u!95 &8176613373536362127
 Animator:
   serializedVersion: 4

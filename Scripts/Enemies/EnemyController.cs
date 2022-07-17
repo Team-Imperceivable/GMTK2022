@@ -41,7 +41,7 @@ public class EnemyController : MonoBehaviour
             EncounterManager encounter = encounterObj.GetComponent<EncounterManager>();
             activeEncounter = encounter;
             encounter.SetEncounterActive(true);
-
+            activeEncounter.ApplyScaling(encounterNumber);
             activeEncounter.SlideToTarget();
             activeEncounter.GenerateUI();
             playerController.ResetCombat();
