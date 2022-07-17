@@ -63,7 +63,7 @@ public class ShowToolTip : PlayerController, IPointerEnterHandler, IPointerExitH
         if(currentItem == null)
             return;
 
-        headerField.text = "    " + currentItem.GetName();
+        headerField.text = "      " + currentItem.GetName();
         contentField.text = currentItem.GetDescription();
 
         if(currentItem.GetCost() == 0)
