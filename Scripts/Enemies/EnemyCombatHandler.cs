@@ -10,6 +10,7 @@ public class EnemyCombatHandler : MonoBehaviour
     public int nextAttack;
     [SerializeField] private List<int> modifiers;
     [SerializeField] private int minDamage, maxDamage;
+    [SerializeField] private int minMoney, maxMoney;
 
     public bool stunned => skipTurnCounter > 0;
     private int skipTurnCounter;
@@ -72,7 +73,7 @@ public class EnemyCombatHandler : MonoBehaviour
     private void ThisDies()
     {
         //Death Animation Goes Here
-        SendMessageUpwards("EnemyDeath");
+        SendMessageUpwards("EnemyDeath", Random.Range(minMoney, maxMoney + 1));
         gameObject.SetActive(false);
     }
 }

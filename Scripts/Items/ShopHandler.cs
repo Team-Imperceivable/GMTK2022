@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class ShopHandler : MonoBehaviour
 {
@@ -12,6 +14,13 @@ public class ShopHandler : MonoBehaviour
     [SerializeField] private SpriteRenderer slot3;
     [SerializeField] private SpriteRenderer slot4;
     [SerializeField] private SpriteRenderer slot5;
+    
+    [SerializeField] private TMP_Text cost0;
+    [SerializeField] private TMP_Text cost1;
+    [SerializeField] private TMP_Text cost2;
+    [SerializeField] private TMP_Text cost3;
+    [SerializeField] private TMP_Text cost4;
+    [SerializeField] private TMP_Text cost5;
 
     private Dictionary<int, Item> possibleItems;
     private List<Die> possibleDice;
@@ -76,6 +85,13 @@ public class ShopHandler : MonoBehaviour
         slot3.sprite = Resources.Load<Sprite>("Sprites/Items/" + itemsInShop[3].item.GetName());
         slot4.sprite = Resources.Load<Sprite>("Sprites/Items/" + itemsInShop[4].item.GetName());
         slot5.sprite = Resources.Load<Sprite>("Sprites/Items/" + itemsInShop[5].item.GetName());
+
+        cost0.text = itemsInShop[0].cost.ToString();
+        cost1.text = itemsInShop[1].cost.ToString();
+        cost2.text = itemsInShop[2].cost.ToString();
+        cost3.text = itemsInShop[3].cost.ToString();
+        cost4.text = itemsInShop[4].cost.ToString();
+        cost5.text = itemsInShop[5].cost.ToString();
     }
 
     private void GenerateItems()
@@ -84,7 +100,7 @@ public class ShopHandler : MonoBehaviour
 
         for(int i = 1; i < itemsInShop.Length; i++)
         {
-            itemsInShop[i] = new ShopItem(possibleItems[Random.Range(0, possibleItems.Count)], minCost);
+            itemsInShop[i] = new ShopItem(possibleItems[Random.Range(0, possibleItems.Count)], minCost + Random.Range(0, randomCost + 1));
         }
     }
 

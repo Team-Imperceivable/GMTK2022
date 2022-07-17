@@ -127,4 +127,13 @@ public class PlayerController : MonoBehaviour
     {
         combatHandler.FullReset();
     }
+
+    public void GiveMoney(int amount)
+    {
+        money += amount;
+    }
+    public void TakeMoney(int amount)
+    {
+        money -= amount;
+    }
 }

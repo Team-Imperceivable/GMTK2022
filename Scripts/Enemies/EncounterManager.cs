@@ -17,6 +17,7 @@ public class EncounterManager : MonoBehaviour
     private GameObject player;
     private int enemiesAlive;
     private List<UIFollowTarget> followers;
+    private PlayerController pc;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +27,7 @@ public class EncounterManager : MonoBehaviour
         GenerateEncounter();
         gameObject.SetActive(false);
         followers = new List<UIFollowTarget>();
+        pc = player.GetComponent<PlayerController>();
     }
 
     void Update()
@@ -124,14 +126,16 @@ public class EncounterManager : MonoBehaviour
         }
     }
 
-    public void EnemyDeath()
+    public void EnemyDeath(int moneyDrop)
     {
         enemiesAlive--;
-        if(enemiesAlive == 0)
+        pc.GiveMoney(moneyDrop);
+        if (enemiesAlive == 0)
         {
             SendMessageUpwards("NextEncounter");
         }
     }
+
     private void UpdateUI()
     {
         foreach(UIFollowTarget follower in followers)

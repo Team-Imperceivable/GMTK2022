@@ -132,6 +132,8 @@ MonoBehaviour:
   modifiers: 
   minDamage: 2
   maxDamage: 3
+  minMoney: 1
+  maxMoney: 1
 --- !u!95 &8393623435974661122
 Animator:
   serializedVersion: 4
