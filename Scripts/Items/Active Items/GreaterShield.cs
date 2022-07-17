@@ -8,7 +8,7 @@ public class GreaterShield : Item
     {
         name = "Greater Shield";
         effect = "Block";
-        description = "Now this is more like it";
+        description = "Block 10";
         cost = 7;
         amount = 10;
         diceSides = 0;
