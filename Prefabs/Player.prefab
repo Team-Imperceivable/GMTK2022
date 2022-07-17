@@ -105,8 +105,8 @@ MonoBehaviour:
   updateHotbar: 0
   selectedItemSlot: 0
   selectableBounds:
-    m_Center: {x: 0, y: 2.5, z: 0}
-    m_Extent: {x: 25, y: 7.5, z: 10}
+    m_Center: {x: 0, y: 5, z: 0}
+    m_Extent: {x: 30, y: 13, z: 10}
 --- !u!114 &8816044515356608220
 MonoBehaviour:
   m_ObjectHideFlags: 0
