@@ -13,7 +13,7 @@ public class ShopHandler : MonoBehaviour
     [SerializeField] private SpriteRenderer slot4;
     [SerializeField] private SpriteRenderer slot5;
 
-    private List<Item> possibleItems;
+    private Dictionary<int, Item> possibleItems;
     private List<Die> possibleDice;
 
     private ShopItem[] itemsInShop;
@@ -21,32 +21,32 @@ public class ShopHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        possibleItems = new List<Item>();
+        possibleItems = new Dictionary<int, Item>();
         possibleDice = new List<Die>();
         itemsInShop = new ShopItem[6];
 
-        possibleItems.Add(new BetterShield());
-        possibleItems.Add(new BetterSword());
-        possibleItems.Add(new Blunt());
-        possibleItems.Add(new DiceBag());
-        possibleItems.Add(new GamblingAddict());
-        possibleItems.Add(new GreaterShield());
-        possibleItems.Add(new GreaterSword());
-        possibleItems.Add(new HealingGem());
-        possibleItems.Add(new MadDice());
-        possibleItems.Add(new Mulligan());
-        possibleItems.Add(new PepperSpray());
-        possibleItems.Add(new BigShield()); ;
-        possibleItems.Add(new SacrificialPact());
-        possibleItems.Add(new StarterShield());
-        possibleItems.Add(new StarterSword());
-        possibleItems.Add(new SugarRush());
-        possibleItems.Add(new TheChalice());
-        possibleItems.Add(new Whip());
+        possibleItems.Add(0, new BetterShield());
+        possibleItems.Add(1,new BetterSword());
+        possibleItems.Add(2, new Blunt());
+        possibleItems.Add(3, new DiceBag());
+        possibleItems.Add(4, new GamblingAddict());
+        possibleItems.Add(5, new GreaterShield());
+        possibleItems.Add(6, new GreaterSword());
+        possibleItems.Add(7,new HealingGem());
+        possibleItems.Add(8, new MadDice());
+        possibleItems.Add(9, new Mulligan());
+        possibleItems.Add(10, new PepperSpray());
+        possibleItems.Add(11, new ReallyBigShield()); ;
+        possibleItems.Add(12, new SacrificialPact());
+        possibleItems.Add(13, new StarterShield());
+        possibleItems.Add(14, new StarterSword());
+        possibleItems.Add(15, new SugarRush());
+        possibleItems.Add(16, new TheChalice());
+        possibleItems.Add(17, new Whip());
 
-        possibleItems.Add(new IntimidatingDrip());
-        possibleItems.Add(new MagicDice());
-        possibleItems.Add(new WeightedDice());
+        possibleItems.Add(18, new IntimidatingDrip());
+        possibleItems.Add(19, new MagicDice());
+        possibleItems.Add(20, new LoadedDice());
 
         Die d6 = Die.CreateDice(6);
         Die d8 = Die.CreateDice(8);
@@ -71,11 +71,11 @@ public class ShopHandler : MonoBehaviour
     private void UpdateSprites()
     {
         dice.sprite =  Resources.Load<Sprite>("Sprites/d" + itemsInShop[0].die.MaxRoll() + "/" + itemsInShop[0].die.MaxRoll() + "d" + itemsInShop[0].die.MaxRoll());
-        slot1.sprite = Resources.Load<Sprite>("Sprites/Items" + itemsInShop[1].item.GetName());
-        slot2.sprite = Resources.Load<Sprite>("Sprites/Items" + itemsInShop[2].item.GetName());
-        slot3.sprite = Resources.Load<Sprite>("Sprites/Items" + itemsInShop[3].item.GetName());
-        slot4.sprite = Resources.Load<Sprite>("Sprites/Items" + itemsInShop[4].item.GetName());
-        slot5.sprite = Resources.Load<Sprite>("Sprites/Items" + itemsInShop[5].item.GetName());
+        slot1.sprite = Resources.Load<Sprite>("Sprites/Items/" + itemsInShop[1].item.GetName());
+        slot2.sprite = Resources.Load<Sprite>("Sprites/Items/" + itemsInShop[2].item.GetName());
+        slot3.sprite = Resources.Load<Sprite>("Sprites/Items/" + itemsInShop[3].item.GetName());
+        slot4.sprite = Resources.Load<Sprite>("Sprites/Items/" + itemsInShop[4].item.GetName());
+        slot5.sprite = Resources.Load<Sprite>("Sprites/Items/" + itemsInShop[5].item.GetName());
     }
 
     private void GenerateItems()
@@ -84,7 +84,7 @@ public class ShopHandler : MonoBehaviour
 
         for(int i = 1; i < itemsInShop.Length; i++)
         {
-            itemsInShop[i] = new ShopItem(possibleItems[Random.Range(0, possibleItems.Count)], minCost + Random.Range(0, randomCost + 1));
+            itemsInShop[i] = new ShopItem(possibleItems[Random.Range(0, possibleItems.Count)], minCost);
         }
     }
 
@@ -109,19 +109,19 @@ public class ShopHandler : MonoBehaviour
         switch (slot)
         {
             case 1:
-                slot1.sprite = null;
+                slot1.gameObject.SetActive(false);
                 break;
             case 2:
-                slot2.sprite = null;
+                slot2.gameObject.SetActive(false);
                 break;
             case 3:
-                slot3.sprite = null;
+                slot3.gameObject.SetActive(false);
                 break;
             case 4:
-                slot4.sprite = null;
+                slot4.gameObject.SetActive(false);
                 break;
             case 5:
-                slot5.sprite = null;
+                slot5.gameObject.SetActive(false);
                 break;
         }
         return toBeReplaced.item;
@@ -130,7 +130,7 @@ public class ShopHandler : MonoBehaviour
     {
         ShopItem toBeReplaced = itemsInShop[0];
         itemsInShop[0] = null;
-        dice.sprite = null;
+        dice.gameObject.SetActive(false);
         return toBeReplaced.die;
     }
 }
