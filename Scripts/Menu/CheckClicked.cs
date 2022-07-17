@@ -19,8 +19,8 @@ public class CheckClicked : MonoBehaviour, IPointerClickHandler, IPointerEnterHa
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("Click");
         SendMessageUpwards(clickedMethodName);
+        text.color = normalColor;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
