@@ -67,6 +67,7 @@ public class TurnManager : MonoBehaviour
     {
         enemyController.NextEncounter();
         inCombat = true;
-        PlayerTurn();
+        playerController.doneWithTurn = false;
+        playerTurn = true;
     }
 }

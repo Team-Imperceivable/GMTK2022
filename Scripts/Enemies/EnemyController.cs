@@ -45,7 +45,7 @@ public class EnemyController : MonoBehaviour
             activeEncounter.SlideToTarget();
             activeEncounter.GenerateUI();
         }
-        playerController.Reset();
+        playerController.ResetCombat();
     }
 
     public void GivePlayerMoney(int amount)

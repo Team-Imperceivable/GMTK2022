@@ -159,6 +159,11 @@ public class ShopHandler : MonoBehaviour
     {
         return;
     }
+
+    public void TakeEnemyTurn()
+    {
+        return;
+    }
 }
 
 public class ShopItem

@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour
         return combatHandler.GetInventory().items[slot - 1];
     }
 
-    public void ResetItems()
+    public void ResetCombat()
     {
         combatHandler.Reset();
     }
