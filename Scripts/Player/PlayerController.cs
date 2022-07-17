@@ -13,10 +13,12 @@ public class PlayerController : MonoBehaviour
 
     public int selectedItemSlot;
 
+    private SFXHandler sfx;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        sfx = gameObject.GetComponentInChildren<SFXHandler>();
     }
 
     // Update is called once per frame
@@ -101,6 +103,10 @@ public class PlayerController : MonoBehaviour
             select = Input.GetButtonDown("Fire1"),
             endTurn = Input.GetButtonDown("Jump")
         };
+        if(inputs.select)
+        {
+            sfx.PlayClick();
+        }
     }
 
     private void OnDrawGizmos()

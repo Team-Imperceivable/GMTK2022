@@ -21,6 +21,7 @@ public class EncounterManager : MonoBehaviour
     private PlayerController pc;
 
     private int scaling;
+    private SFXHandler sfx;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +32,7 @@ public class EncounterManager : MonoBehaviour
         gameObject.SetActive(false);
         followers = new List<UIFollowTarget>();
         pc = player.GetComponent<PlayerController>();
+        sfx = player.GetComponentInChildren<SFXHandler>();
     }
 
     void Update()
@@ -146,6 +148,7 @@ public class EncounterManager : MonoBehaviour
 
     public void EnemyDeath(int moneyDrop)
     {
+        sfx.PlayEnemyDeath();
         enemiesAlive--;
         pc.GiveMoney(moneyDrop);
         if (enemiesAlive == 0)
