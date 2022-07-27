@@ -104,7 +104,7 @@ public class EncounterManager : MonoBehaviour
                 {
                     enemiesAlive = 1;
                     if (selected.CompareTag("Shop"))
-                        targetPosition.x += 20;
+                        targetPosition.x += 16;
                     break;
                 }
                 foreach(GameObject exclusive in exclusiveEncounters)

@@ -1889,6 +1889,7 @@ GameObject:
   - component: {fileID: 9169175292305986784}
   - component: {fileID: 9169175292305986785}
   - component: {fileID: 9169175292305986786}
+  - component: {fileID: 5646492897598298790}
   m_Layer: 0
   m_Name: Item Slot 4
   m_TagString: Shop
@@ -1990,6 +1991,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5646492897598298790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9169175292305986791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffcca3f21967044aa12f36f021c9bb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shop: {fileID: 9169175293074334505}
 --- !u!1 &9169175292841332730
 GameObject:
   m_ObjectHideFlags: 0
@@ -2016,7 +2030,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9169175292841332730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6, y: 21.5, z: 0}
+  m_LocalPosition: {x: 0, y: 22, z: 0}
   m_LocalScale: {x: 20, y: 20, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2112,6 +2126,7 @@ GameObject:
   - component: {fileID: 9169175292895846343}
   - component: {fileID: 9169175292895846336}
   - component: {fileID: 9169175292895846337}
+  - component: {fileID: 7262426235725563606}
   m_Layer: 0
   m_Name: Item Slot 5
   m_TagString: Shop
@@ -2213,6 +2228,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7262426235725563606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9169175292895846342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffcca3f21967044aa12f36f021c9bb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shop: {fileID: 9169175293074334505}
 --- !u!1 &9169175293062800278
 GameObject:
   m_ObjectHideFlags: 0
@@ -2224,6 +2252,7 @@ GameObject:
   - component: {fileID: 9169175293062800279}
   - component: {fileID: 9169175293062800272}
   - component: {fileID: 9169175293062800273}
+  - component: {fileID: 4071394739693734422}
   m_Layer: 0
   m_Name: Item Slot 2
   m_TagString: Shop
@@ -2325,6 +2354,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4071394739693734422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9169175293062800278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffcca3f21967044aa12f36f021c9bb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shop: {fileID: 9169175293074334505}
 --- !u!1 &9169175293074334511
 GameObject:
   m_ObjectHideFlags: 0
@@ -2350,8 +2392,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9169175293074334511}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 11, y: 0, z: 0}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9169175293709167676}
@@ -2402,6 +2444,7 @@ GameObject:
   - component: {fileID: 9169175293359054160}
   - component: {fileID: 9169175293359054161}
   - component: {fileID: 9169175293359054162}
+  - component: {fileID: 7557698994478499238}
   m_Layer: 0
   m_Name: Dice Slot
   m_TagString: Shop
@@ -2503,6 +2546,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7557698994478499238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9169175293359054167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffcca3f21967044aa12f36f021c9bb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shop: {fileID: 9169175293074334505}
 --- !u!1 &9169175293449437718
 GameObject:
   m_ObjectHideFlags: 0
@@ -2514,6 +2570,7 @@ GameObject:
   - component: {fileID: 9169175293449437719}
   - component: {fileID: 9169175293449437712}
   - component: {fileID: 9169175293449437713}
+  - component: {fileID: 1218565880564836311}
   m_Layer: 0
   m_Name: Item Slot 1
   m_TagString: Shop
@@ -2615,6 +2672,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1218565880564836311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9169175293449437718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffcca3f21967044aa12f36f021c9bb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shop: {fileID: 9169175293074334505}
 --- !u!1 &9169175293709167667
 GameObject:
   m_ObjectHideFlags: 0
@@ -2710,6 +2780,7 @@ GameObject:
   - component: {fileID: 9169175293999535070}
   - component: {fileID: 9169175293999535071}
   - component: {fileID: 9169175293999535064}
+  - component: {fileID: 5801150417217918274}
   m_Layer: 0
   m_Name: Item Slot 3
   m_TagString: Shop
@@ -2811,3 +2882,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5801150417217918274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9169175293999535069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffcca3f21967044aa12f36f021c9bb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shop: {fileID: 9169175293074334505}

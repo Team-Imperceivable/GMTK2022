@@ -25,13 +25,13 @@ public class DiceVisuals : MonoBehaviour
             selected = d6Sprites;
         } else if(diceType == 8)
         {
-            selected = d6Sprites;
+            selected = d8Sprites;
         } else if(diceType == 10)
         {
-            selected = d6Sprites;
+            selected = d10Sprites;
         } else if (diceType == 12)
         {
-            selected = d6Sprites;
+            selected = d12Sprites;
         }
     }
     public void SetRoll(int roll)
